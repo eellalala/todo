@@ -1,5 +1,11 @@
 import { format, isBefore } from 'date-fns'; //import other functions from data-fns as needed
 
+import './modules/controls.js';
+import './modules/dom.js';
+import './modules/lists.js';
+import './modules/project.js';
+import './modules/todo.js';
+
 /* 
 Each to-do is an object.
 Properties:
@@ -21,33 +27,14 @@ edit and delete button (appears when hovering on it)
 
 store to-do objects in an array. and have arrays for the different categories
 
-import datefns
 
-createProject
+NOT SURE WHERE THIS GOES
+let dueToday = filterWithin(allTD, 1);
+let dueThreeDays = all.filterWithin(allTD, 3);
+let dueWeek = all.filterWithin(allTD, 7);
 
 store with localStorage
 
 Future: Mobile compatibility
 mobile devices don't have hover, so the hover to reveal delete button doesnt work 
 */
-
-class ToDoItem {
-    isCompleted = false;
-
-    constructor(title, dueDate, priority, category, note) {
-        this.title = title;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.category = category;
-        this.note = note;
-    }
-
-    saySomething(){
-        console.log('I am a todo');
-    }
-    
-    /* keep if needed
-    get something(...) {}
-    set something(...) {}
-    */
-}

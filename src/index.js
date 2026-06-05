@@ -1,10 +1,11 @@
+import "./styles.css";
 import { format, isBefore } from 'date-fns'; //import other functions from data-fns as needed
 
 import './modules/controls.js';
 import './modules/dom.js';
 import './modules/lists.js';
 import './modules/project.js';
-import './modules/todo.js';
+import './modules/todo.js'; // later, change maybe to initialize function in controls.js that determines inital run
 
 /* 
 Each to-do is an object.

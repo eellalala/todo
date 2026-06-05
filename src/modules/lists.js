@@ -4,12 +4,20 @@ export {allTD, filterWithin, sortByDue};
 
 const allTD = [];
 
-function filterWithin(tDs, days) {
+function filterPast(tdArr) {
+    //!!!
+}
+
+function filterFuture(TDArtdArrr) {
+    //!!!
+}
+
+function filterWithin(tdArr, days) {
     const filteredTDs = [];
     const today = startOfDay(new Date());
     const daysFromNow = addDays(today, days);
 
-    tDs.forEach(todo => {
+    tdArr.forEach(todo => {
         const dueDay = todo.dueDate;
         if (isWithinInterval(dueDay, {
             start: today,
@@ -20,24 +28,24 @@ function filterWithin(tDs, days) {
     return filteredTDs;
 }
 
-function sortByDue(tDs) {
-    if (tDs.length <= 1) return tDs;
-    const p = tDs.pop();
+function sortByDue(tdArr) {
+    if (tdArr.length <= 1) return tdArr;
+    const p = tdArr.pop();
     const leftArr = [];
     const rightArr = [];
-    for (const tD of tDs) {
+    for (const tD of tdArr) {
         if (isBefore(tD.dueDay, p.dueDay)) {
             leftArr.push(tD);
         } else {
             rightArr.push(tD);
         }
     }
-    tDs.push(p);
+    tdArr.push(p);
     return [...sortByDue(leftArr), p, ...sortByDue(rightArr)];
 }
 
 /* nice to have feature: call sortByPrio if byDue they're the same
-function sortByPrio(tDs) {
+function sortByPrio(tdArr) {
 
 }
 */

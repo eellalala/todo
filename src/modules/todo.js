@@ -9,12 +9,9 @@ class ToDoItem {
         this.priority = priority;
         this.project = project;
         this.note = note;
+        this.id = crypto.randomUUID();
 
         allTD.unshift(this);
-    }
-
-    saySomething(){
-        console.log('I am a todo');
     }
 
     markDone(){
@@ -36,3 +33,5 @@ console.log(testTD1.isDone);
 testTD1.markDone();
 console.log(testTD1.isDone);
 console.log(testTD1.dueDate);
+
+console.log(testTD1.id);

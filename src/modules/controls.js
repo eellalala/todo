@@ -1,20 +1,25 @@
-import { allTD, filterWithin, sortByDue } from './lists.js';
-import { renderTDArr } from './dom.js';
+import { allTD, filterWithin, sortByDue, deleteTd } from './lists.js';
+import { renderTDArr, removeTD, editTD, finishEditTD } from './dom.js';
 
 const main = document.getElementById('main');
 
 // FOR DELTE FUNCTION -- DO first. then implement edit
 main.addEventListener('click', (event) => {
-    if (event.target.classList.contains('delete-btn')) {
-        // delete the actual item --  add an ID property for todo with crypto.randomUUID().
-            // how to save the id: when the item is rendered, set the ID of the edit button to delete-btn-ID
-            // then, string splice off the first 12 characters to get the ID again
-        // delete from dom - 1. find the parent container the button belonged to, then delete. 
+    const target = event.target;
+    const id = target.id.slice(-36);
+    if (target.classList.contains('delete-btn') || target.classList.contains('check-btn')) {
+
+        // delete the actual item 
+        // 1. call search for id. (in list module)
+        // 1. call delete todo based on id (in todo module) 
+        deleteTd(id, allTD);
+        
+        removeTD(id);
     }
-    if (event.target.classList.contains('edit-btn')) {
+    if (target.classList.contains('edit-btn')) {
         // delete the actual item --  add an ID property for todo with crypto.randomUUID().
             // how to save the id: when the item is rendered, set the ID of the edit button to edit-btn-ID
-            // then, string splice off the first 10 characters to get the ID again
+            // then, stringplice the last 36 characters to get the ID again
         // edit from dom - 1. 
     }
 })

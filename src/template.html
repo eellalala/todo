@@ -13,30 +13,25 @@
     </div>
     <div id="main">
         <h1>My To-Do</h1>
-        <div id="upcoming-tasks" class="container">
-            <h3>Upcoming</h3>
-            <template id="todo-template">
-                <div id="todo-container">
-                    <button type="button" class="checkbox-btn">Check</button>
-                    <span>Task</span>
-                    <button type="button" class="edit-btn">Edit</button>
-                    <button type="button" class="delete-btn">Delete</button>
-                </div>
-            </template>
-            <button type="button" id="upcoming-test-btn">Render Test Button</button>
+        <button type="button" id="add-td-btn">+</button>
+        <div>
+            <div id="upcoming-tasks" class="container">
+                <h3>Upcoming</h3>
+                <button type="button" id="upcoming-test-btn">Render Test Button</button>
+            </div>
+            <div id="overdue-tasks" class="container">
+                <h3>Overdue</h3>
+                <button type="button" id="overdue-test-btn">Render Test Button</button>
+            </div>
         </div>
-        <div id="overdue-tasks" class="container">
-            <h3>Overdue</h3>
-            <template id="todo-template">
-                <div id="todo-container">
-                    <button type="button" class="checkbox-btn">Check</button>
-                    <span>Task</span>
-                    <button type="button" class="edit-btn">Edit</button>
-                    <button type="button" class="delete-btn">Delete</button>
-                </div>
-            </template>
-            <button type="button" id="overdue-test-btn">Render Test Button</button>
-        </div>
+        <template id="todo-template">
+            <div class="todo-container">
+                <button type="button" class="check-btn">Check</button>
+                <span>Task</span>
+                <button type="button" class="edit-btn">Edit</button>
+                <button type="button" class="delete-btn">Delete</button>
+            </div>
+        </template>
     </div>
 </body>
 </html>

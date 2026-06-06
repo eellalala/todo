@@ -1,3 +1,5 @@
+const allProjects = []; // projects are stored as array of array .
+
 class Project {
     tasks = [];
 

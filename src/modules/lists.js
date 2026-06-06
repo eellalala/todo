@@ -1,23 +1,23 @@
 import { isWithinInterval, startOfDay, addDays, isBefore } from 'date-fns';
 
-export {allTD, filterWithin, sortByDue};
+export { allTD, filterWithin, sortByDue, deleteTd };
 
 const allTD = [];
 
-function filterPast(tdArr) {
+function filterPast(tDArr) {
     //!!!
 }
 
-function filterFuture(TDArtdArrr) {
+function filterFuture(tDArr) {
     //!!!
 }
 
-function filterWithin(tdArr, days) {
+function filterWithin(tDArr, days) {
     const filteredTDs = [];
     const today = startOfDay(new Date());
     const daysFromNow = addDays(today, days);
 
-    tdArr.forEach(todo => {
+    tDArr.forEach(todo => {
         const dueDay = todo.dueDate;
         if (isWithinInterval(dueDay, {
             start: today,
@@ -28,24 +28,37 @@ function filterWithin(tdArr, days) {
     return filteredTDs;
 }
 
-function sortByDue(tdArr) {
-    if (tdArr.length <= 1) return tdArr;
-    const p = tdArr.pop();
+function sortByDue(tDArr) {
+    if (tDArr.length <= 1) return tDArr;
+    const p = tDArr.pop();
     const leftArr = [];
     const rightArr = [];
-    for (const tD of tdArr) {
+    for (const tD of tDArr) {
         if (isBefore(tD.dueDay, p.dueDay)) {
             leftArr.push(tD);
         } else {
             rightArr.push(tD);
         }
     }
-    tdArr.push(p);
+    tDArr.push(p);
     return [...sortByDue(leftArr), p, ...sortByDue(rightArr)];
 }
 
+function findIndexById(id, tDArr) {
+    tDArr.findIndex((td) => td.id === id);
+}
+
+function deleteTd(id, tDArr) {
+    const index = findIndexById(id, tDArr);
+    tDArr.splice(index, 1);
+}
+
+function updateAllLists(allTD) {
+    // maybe needed? updates all lists at once when allTD changes
+}
+
 /* nice to have feature: call sortByPrio if byDue they're the same
-function sortByPrio(tdArr) {
+function sortByPrio(tDArr) {
 
 }
 */

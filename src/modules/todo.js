@@ -29,9 +29,3 @@ const testTD1 = new ToDoItem('grocery shopping', new Date(2026, 5, 1), 'high', '
 const testTD2 = new ToDoItem('dog walk', new Date(2026, 5, 4), 'high', 'life', '');
 const testTD3 = new ToDoItem('cooking', new Date(2026, 5, 5), 'high', 'life', '');
 
-console.log(testTD1.isDone);
-testTD1.markDone();
-console.log(testTD1.isDone);
-console.log(testTD1.dueDate);
-
-console.log(testTD1.id);

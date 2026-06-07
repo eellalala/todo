@@ -1,5 +1,6 @@
 import { allTD, filterWithin, sortByDue, deleteTd } from './lists.js';
-import { renderTDArr, removeTD, editTD, finishEditTD } from './dom.js';
+import { allProjects } from './project.js'
+import { renderTDArr, removeTD, editTD, finishEditTD, renderProjectsSide } from './dom.js';
 
 const main = document.getElementById('main');
 
@@ -8,12 +9,7 @@ main.addEventListener('click', (event) => {
     const target = event.target;
     const id = target.id.slice(-36);
     if (target.classList.contains('delete-btn') || target.classList.contains('check-btn')) {
-
-        // delete the actual item 
-        // 1. call search for id. (in list module)
-        // 1. call delete todo based on id (in todo module) 
-        deleteTd(id, allTD);
-        
+        deleteTd(id, allTD);      
         removeTD(id);
     }
     if (target.classList.contains('edit-btn')) {
@@ -36,6 +32,11 @@ testBtn.addEventListener('click', () => {
 
     const filterWeek = filterWithin(allTD, 7);
     console.log(filterWeek.map(todo => (todo.title))); //after filter
+})
+
+const projectsTestBtn = document.getElementById('projects-test-btn');
+projectsTestBtn.addEventListener('click', () => {
+    renderProjectsSide(allProjects);
 })
 
 const upcomingTestBtn = document.getElementById('upcoming-test-btn');

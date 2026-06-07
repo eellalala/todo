@@ -9,7 +9,9 @@
     <button type="button" id="test-btn">Test Button</button>
     <div id="sidebar">
         <h3>My Projects</h3>
+        <button type="button" id="add-project-btn">+</button>
         <p>Project list here</p>
+        <button type="button" id="projects-test-btn">Render Test Button</button>
     </div>
     <div id="main">
         <h1>My To-Do</h1>
@@ -27,9 +29,14 @@
         <template id="todo-template">
             <div class="todo-container">
                 <button type="button" class="check-btn">Check</button>
-                <span>Task</span>
+                <span>Task Title</span>
                 <button type="button" class="edit-btn">Edit</button>
                 <button type="button" class="delete-btn">Delete</button>
+            </div>
+        </template>
+        <template id="side-project-template">
+            <div class="side-project-container">
+                <span>Project Title</span>
             </div>
         </template>
     </div>

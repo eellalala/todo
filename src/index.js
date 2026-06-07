@@ -28,6 +28,9 @@ edit and delete button (appears when hovering on it)
 
 store to-do objects in an array. and have arrays for the different categories
 
+Essentially, the check and delete buttons have the same functionality. one just feels better
+
+Define project color options (5 or 6?) with CSS and use window.GetComputedStyle to declare in JS
 
 NOT SURE WHERE THIS GOES
 let dueToday = filterWithin(allTD, 1);
@@ -38,4 +41,7 @@ store with localStorage
 
 Future: Mobile compatibility
 mobile devices don't have hover, so the hover to reveal delete button doesnt work 
+Better optimizination
+Whiel quicksort is quite efficient, there could be improvememnts made in how it is called and where.
+Also, when new items are added the entire lists are re-rendered rather than just adding on the new item 
 */

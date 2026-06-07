@@ -1,5 +1,5 @@
 import { allTD, filterWithin, sortByDue} from './lists.js';
-export { renderTDArr, removeTD, editTD, finishEditTD }
+export { renderTDArr, removeTD, editTD, finishEditTD, renderProjectsSide };
 /* remember to separate the function calls with controls.js to avoid clutter later. this should only 
 be dom manipulation things only. event listeners are on controls.js */
 
@@ -35,4 +35,20 @@ function editTD() {
 
 function finishEditTD() {
     //!!! when clicking on done editing, reflects changes
+}
+
+function renderProjectsSide (projectArr) { 
+    const sidebar = document.getElementById('sidebar');
+    const projectTemplate = document.getElementById('side-project-template');
+    projectArr.forEach((project) => {
+        const projectItem = projectTemplate.content.cloneNode(true);
+        const projectContainer = projectItem.querySelector('div');
+        const projectTitle = projectItem.querySelector('span');
+        projectTitle.textContent = project.title;
+        projectContainer.style.backgroundColor = project.color;
+
+        projectContainer.id = `side-project-container-${project.id}`;
+
+        sidebar.appendChild(projectContainer);
+    })
 }

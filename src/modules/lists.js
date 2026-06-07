@@ -1,15 +1,27 @@
-import { isWithinInterval, startOfDay, addDays, isBefore } from 'date-fns';
+import { isWithinInterval, startOfDay, addDays, isBefore, isSameDay } from 'date-fns';
 
-export { allTD, filterWithin, sortByDue, deleteTd };
+export { allTD, filterPast, filterFuture, filterWithin, sortByDue, deleteTd };
 
 const allTD = [];
 
 function filterPast(tDArr) {
-    //!!!
+    const filteredTDs = [];
+    const today = startOfDay(new Date());
+
+    tDArr.forEach(td => {
+        if (isBefore(td.dueDate, today)) filteredTDs.push(td);
+    })
+    return filteredTDs;
 }
 
 function filterFuture(tDArr) {
-    //!!!
+    const filteredTDs = [];
+    const today = startOfDay(new Date());
+
+    tDArr.forEach(td => {
+        if (isBefore(today, td.dueDate) || isSameDay(today, td.dueDate)) filteredTDs.push(td);
+    })
+    return filteredTDs;
 }
 
 function filterWithin(tDArr, days) {
@@ -17,13 +29,12 @@ function filterWithin(tDArr, days) {
     const today = startOfDay(new Date());
     const daysFromNow = addDays(today, days);
 
-    tDArr.forEach(todo => {
-        const dueDay = todo.dueDate;
-        if (isWithinInterval(dueDay, {
+    tDArr.forEach(td => {
+        if (isWithinInterval(td.dueDate, {
             start: today,
             end: daysFromNow
         }))
-        filteredTDs.push(todo);
+        filteredTDs.push(td);
     })
     return filteredTDs;
 }

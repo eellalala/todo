@@ -1,4 +1,4 @@
-import { allTD, filterWithin, sortByDue, deleteTd } from './lists.js';
+import { allTD, filterPast, filterFuture, filterWithin, sortByDue, deleteTd } from './lists.js';
 import { allProjects } from './project.js'
 import { renderTDArr, removeTD, editTD, finishEditTD, renderProjectsSide } from './dom.js';
 
@@ -42,11 +42,11 @@ projectsTestBtn.addEventListener('click', () => {
 const upcomingTestBtn = document.getElementById('upcoming-test-btn');
 upcomingTestBtn.addEventListener('click', () => {
     const upcomingTasks = document.getElementById('upcoming-tasks');
-    renderTDArr(upcomingTasks, allTD);
+    renderTDArr(upcomingTasks, filterFuture(allTD));
 })
 
 const overdueTestBtn = document.getElementById('overdue-test-btn');
 overdueTestBtn.addEventListener('click', () => {
     const overdueTasks = document.getElementById('overdue-tasks');
-    renderTDArr(overdueTasks, allTD);
+    renderTDArr(overdueTasks, filterPast(allTD));
 })

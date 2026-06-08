@@ -1,4 +1,5 @@
 import { allTD } from './lists.js';
+export { ToDoItem };
 
 class ToDoItem {
     isDone = false;
@@ -14,8 +15,8 @@ class ToDoItem {
         allTD.unshift(this);
     }
 
-    markDone(){
-        this.isDone = true;
+    toggleDone(){
+        this.isDone = !this.isDone;
     }
     
     /* keep if needed

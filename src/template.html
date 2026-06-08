@@ -8,15 +8,16 @@
 <body>
     <button type="button" id="test-btn">Test Button</button>
     <div id="sidebar">
-        <h3>My Projects</h3>
+        <h2 id="sidebar-head">My Projects</h2>
         <button type="button" id="add-project-btn">+</button>
-        <p>Project list here</p>
         <button type="button" id="projects-test-btn">Render Test Button</button>
     </div>
     <div id="main">
-        <h1>My To-Do</h1>
-        <button type="button" id="add-td-btn">+</button>
-        <div>
+        <div id="heading">
+            <h1>My To-Do</h1>
+            <button type="button" id="add-td-btn">+</button>
+        </div>
+        <div id="lists-container">
             <div id="upcoming-tasks" class="container">
                 <h3>Upcoming</h3>
                 <button type="button" id="upcoming-test-btn">Render Test Button</button>
@@ -28,11 +29,13 @@
         </div>
         <template id="todo-template">
             <div class="todo-container">
-                <button type="button" class="check-btn">☐</button>
-                <span></span>
-                <span>Task Title</span>
-                <button type="button" class="edit-btn">Edit</button>
-                <button type="button" class="delete-btn">Delete</button>
+                <button type="button" class="check-btn"></button>
+                <span class="todo-title">Task Title</span>
+                <span>Due Date</span>
+                <div class="todo-btn">
+                    <button type="button" class="edit-btn">Edit</button>
+                    <button type="button" class="delete-btn">Delete</button>
+                </div>
             </div>
         </template>
         <template id="side-project-template">

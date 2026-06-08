@@ -1,16 +1,26 @@
-import { allTD, filterWithin, sortByDue} from './lists.js';
-export { renderTDArr, checkTD, removeTD, editTD, finishEditTD, renderProjectsSide };
+import { format } from 'date-fns';
+import { allTD, filterWithin, findById, sortByDue} from './lists.js';
+export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide };
 /* remember to separate the function calls with controls.js to avoid clutter later. this should only 
 be dom manipulation things only. event listeners are on controls.js */
 
 
-function renderTDArr(parent, tDArr) {
-    const tDTemplate = document.getElementById('todo-template');
+function renderTDArr(parent, tDArr) {;
     tDArr.forEach((td) => {
+        renderTD(td, parent);
+    })
+}
+
+function renderTD(td, parent) {
+        const tDTemplate = document.getElementById('todo-template');
+
         const tDItem = tDTemplate.content.cloneNode(true);
         const tDContainer = tDItem.querySelector('div');
-        const tDTitle = tDContainer.querySelector('span');
+        const tDTitle = tDContainer.querySelectorAll('span')[0];
         tDTitle.textContent = td.title;
+        tDTitle.id = `todo-title-${td.id}`;
+        const tDDate = tDContainer.querySelectorAll('span')[1];
+        tDDate.textContent = format(td.dueDate, 'eee MMM d');
 
         const checkBtn = tDContainer.querySelectorAll('button')[0];
         checkBtn.id = `check-btn-${td.id}`;
@@ -21,12 +31,46 @@ function renderTDArr(parent, tDArr) {
         tDContainer.id = `todo-container-${td.id}`;
 
         parent.appendChild(tDContainer);
-    })
 }
 
 function checkTD(tDId) {
     const checkBtn = document.getElementById(`check-btn-${tDId}`);
-    checkBtn.textContent = '☑'; 
+    checkBtn.textContent = '✓';
+}
+
+function uncheckTD(tDId) {
+    const checkBtn = document.getElementById(`check-btn-${tDId}`);
+    checkBtn.textContent = '';
+}
+
+function expandTD(tDId) {
+    const tDContainer = document.getElementById(`todo-container-${tDId}`);
+    tDContainer.classList.add('expanded-todo');
+
+    const td = findById(tDId, allTD);
+
+    const tDProject = document.createElement('div');
+    const tDProjectText = document.createElement('span');
+    tDProjectText.textContent = td.project;
+    tDProject.appendChild(tDProjectText);
+    
+    const tDDate = tDContainer.querySelectorAll('span')[1];
+    tDDate.textContent = `Due: ${format(td.dueDate, 'eeee, MMMM do yyyy')}`;
+
+    tDContainer.insertBefore(tDProject, tDDate);
+}
+
+function collapseTD(tDId) {
+    const tDContainer = document.getElementById(`todo-container-${tDId}`);
+    tDContainer.classList.remove('expanded-todo'); 
+
+    const td = findById(tDId, allTD);
+
+    const tDDate = tDContainer.querySelectorAll('span')[2];
+    tDDate.textContent = format(td.dueDate, 'eee, MMM d');
+
+    const tDProject = tDContainer.querySelector('div');
+    tDProject.remove();
 }
 
 function removeTD(tDId) {

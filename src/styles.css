@@ -3,26 +3,76 @@
  Mofusand Cat sea profile picture.
  Secondary colours (for different topics) are corals. 
  */
+ :root {
+    --background-color: rgb(184, 221, 233);
+    --secondary-color: white;
+    --text-color: rgb(49, 46, 73);
+
+    --project-color-1: #E68500;
+    --project-color-2: #BD5058;
+    --project-color-3: #6493B6;
+    --project-color-4: #9296A5;
+    --project-color-5: #D8ADCD;
+    --project-color-1-light: orange;
+    --project-color-2-light: orange;
+    --project-color-3-light: orange;
+    --project-color-4-light: orange;
+    --project-color-5-light: orange;
+ }
 
  body {
     display: flex;
     flex-direction: row;
     font-family: sans-serif;
-    background-color: lightblue;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 #sidebar {
-    background-color: white;
+    background-color: var(--secondary-color);
     padding: 3%;
+}
+
+#sidebar-head {
+    display: inline-block;
+}
+
+.side-project-container {
+    margin: 3% 2%;
+    padding: 3%;
+    border-radius: 7px;
+    text-align: center;
+    color: var(--secondary-color);
+    /* make it lighter when clicked */
 }
 
 #main {
-    display: flex;
     padding: 3%;
 }
 
+h1 {
+    display: inline-block;
+}
+
+#lists-container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.todo-container {
+    background-color: var(--secondary-color);
+    margin: 3% 2%;
+    padding: 3%;
+    border-radius: 8px;
+    text-align: center;
+}
+
+
 .check-btn {
     all: unset;
-    width: 10px;
-    background-color: white;
+    display: inline-block;
+    min-width: 10px;
+    min-height: 10px;
+    background-color: var(--secondary-color);
+    border: 2px solid var(--text-color);
 }

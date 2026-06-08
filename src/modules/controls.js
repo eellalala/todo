@@ -1,6 +1,6 @@
 import { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteTD } from './lists.js';
 import { allProjects } from './project.js';
-import { renderTDArr, checkTD, removeTD, editTD, finishEditTD, renderProjectsSide } from './dom.js';
+import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide } from './dom.js';
 import { ToDoItem } from './todo.js';
 
 const main = document.getElementById('main');
@@ -14,13 +14,9 @@ main.addEventListener('click', (event) => {
         removeTD(id);
     }
     if (target.classList.contains('check-btn')) {
-        checkTD(id);
-        console.log(id);
         const td = findById(id, allTD);
-        console.log(td);
-        td.markDone();
-        console.log(td);
-        // Mark the object TOdo as done 
+        td.isDone ? uncheckTD(id) : checkTD(id);
+        td.toggleDone();
     }
     if (target.classList.contains('edit-btn')) {
         // delete the actual item --  add an ID property for todo with crypto.randomUUID().
@@ -30,6 +26,17 @@ main.addEventListener('click', (event) => {
     }
 })
 
+document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('todo-title')) {
+        const id = event.target.id.slice(-36);
+        const container = document.getElementById(`todo-container-${id}`);
+        console.log(container.classList);
+        if (container.classList.contains('expanded-todo')) {
+            collapseTD(id);
+            container.classList.remove('expanded-todo'); 
+        } else expandTD(id);
+    }
+})
 
 //testing area 
 const testBtn = document.getElementById('test-btn');

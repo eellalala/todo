@@ -1,5 +1,5 @@
 import { allTD, filterWithin, sortByDue} from './lists.js';
-export { renderTDArr, removeTD, editTD, finishEditTD, renderProjectsSide };
+export { renderTDArr, checkTD, removeTD, editTD, finishEditTD, renderProjectsSide };
 /* remember to separate the function calls with controls.js to avoid clutter later. this should only 
 be dom manipulation things only. event listeners are on controls.js */
 
@@ -13,7 +13,7 @@ function renderTDArr(parent, tDArr) {
         tDTitle.textContent = td.title;
 
         const checkBtn = tDContainer.querySelectorAll('button')[0];
-        checkBtn.id = `check-btn${td.id}`;
+        checkBtn.id = `check-btn-${td.id}`;
         const editBtn = tDContainer.querySelectorAll('button')[1];
         editBtn.id = `edit-btn-${td.id}`;
         const deleteBtn = tDContainer.querySelectorAll('button')[2];
@@ -22,6 +22,11 @@ function renderTDArr(parent, tDArr) {
 
         parent.appendChild(tDContainer);
     })
+}
+
+function checkTD(tDId) {
+    const checkBtn = document.getElementById(`check-btn-${tDId}`);
+    checkBtn.textContent = '☑'; 
 }
 
 function removeTD(tDId) {

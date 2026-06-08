@@ -1,6 +1,6 @@
 import { isWithinInterval, startOfDay, addDays, isBefore, isSameDay } from 'date-fns';
 
-export { allTD, filterPast, filterFuture, filterWithin, sortByDue, deleteTd };
+export { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteTD };
 
 const allTD = [];
 
@@ -59,7 +59,11 @@ function findIndexById(id, tDArr) {
     tDArr.findIndex((td) => td.id === id);
 }
 
-function deleteTd(id, tDArr) {
+function findById(id, tDArr) {
+    return tDArr.find((td) => td.id === id);
+}
+
+function deleteTD(id, tDArr) {
     const index = findIndexById(id, tDArr);
     tDArr.splice(index, 1);
 }

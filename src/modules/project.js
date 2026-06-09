@@ -1,5 +1,5 @@
 import { sortByDue } from './lists.js';
-export { allProjects };
+export { allProjects, Project };
 
 const allProjects = []; // projects are stored as array of array .
 

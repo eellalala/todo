@@ -102,6 +102,12 @@ function finishEditTD() {
 
 function renderProjectsSide (projectArr) { 
     const sidebar = document.getElementById('sidebar');
+
+    //remove existing children, prevent duplicate render
+    sidebar.querySelectorAll('.side-project-container').forEach(existingProj => {
+        existingProj.remove();
+    })
+
     const projectTemplate = document.getElementById('side-project-template');
     projectArr.forEach((project) => {
         const projectItem = projectTemplate.content.cloneNode(true);

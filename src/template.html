@@ -8,23 +8,36 @@
 <body>
     <div id="sidebar">
         <h2 id="sidebar-head">My Projects</h2>
-        <button type="button" id="add-project-btn">+</button>
+        <button type="button" class="add-btn" id="add-project-btn">+</button>
         <button type="button" id="projects-test-btn">Render Test Button</button>
+        <section id="add-project-view">
+            <h3>Add Project</h3>
+            <form>
+                <label for="project-title-input">Project Title:</label>
+                <input type="text" name="project-title" id="project-title-input">
+
+                <label for="project-color-input">Project Color:</label>
+                <input type="color" name="project-color" id="project-color-input" colorspace="display-p3">
+
+                <button type="button" id="add-project-back">Back</button>
+                <button type="button" id="add-project-submit">Add</button>
+            </form>
+        </section>
     </div>
     <div id="main">
         <div id="heading">
             <h1>My To-Do</h1>
-            <button type="button" id="add-td-btn">+</button>
+            <button type="button" class="add-btn" id="add-td-btn">+</button>
         </div>
         <div id="lists-container">
-            <div id="upcoming-tasks" class="container">
+            <section id="upcoming-tasks" class="container">
                 <h3>Upcoming</h3>
                 <button type="button" id="upcoming-test-btn">Render Test Button</button>
-            </div>
-            <div id="overdue-tasks" class="container">
+            </section>
+            <section id="overdue-tasks" class="container">
                 <h3>Overdue</h3>
                 <button type="button" id="overdue-test-btn">Render Test Button</button>
-            </div>
+            </section>
         </div>
         <template id="todo-template">
             <div class="todo-container">

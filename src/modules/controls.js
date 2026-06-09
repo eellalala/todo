@@ -33,23 +33,11 @@ document.addEventListener('click', (event) => {
         console.log(container.classList);
         if (container.classList.contains('expanded-todo')) {
             collapseTD(id);
-            container.classList.remove('expanded-todo'); 
         } else expandTD(id);
     }
 })
 
 //testing area 
-const testBtn = document.getElementById('test-btn');
-
-testBtn.addEventListener('click', () => { 
-    console.log(allTD.map(todo => (todo.title))); //before sorting and filter
-
-    const sorted = sortByDue(allTD);
-    console.log(sorted.map(todo => (todo.title))); //after sorting
-
-    const filterWeek = filterWithin(allTD, 7);
-    console.log(filterWeek.map(todo => (todo.title))); //after filter
-})
 
 const projectsTestBtn = document.getElementById('projects-test-btn');
 projectsTestBtn.addEventListener('click', () => {

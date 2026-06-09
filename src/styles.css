@@ -26,11 +26,16 @@
     font-family: sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
+
+    box-sizing: border-box;
 }
 
 #sidebar {
     background-color: var(--secondary-color);
-    padding: 3%;
+    padding: 1.5%;
+    margin: 0.5% 1% 0 0;
+
+    border-radius: 20px;
 }
 
 #sidebar-head {
@@ -59,14 +64,34 @@ h1 {
     flex-wrap: nowrap;
 }
 
+.container {
+    background-color: rgb(241, 248, 249, 0.5);
+
+    min-width: 50%;
+
+    padding: 3%;
+    margin: 5% 10% 5% 0;
+    border-radius: 10px;
+}
+
 .todo-container {
     background-color: var(--secondary-color);
     margin: 3% 2%;
     padding: 3%;
     border-radius: 8px;
-    text-align: center;
+
+    width: fit-content;
+
+    text-align: left;
 }
 
+.todo-container > * {
+    margin: 3% 0;
+}
+
+.todo-container > span:not(:first-of-type) { 
+    display: block;
+}
 
 .check-btn {
     all: unset;

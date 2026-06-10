@@ -1,6 +1,6 @@
 import { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteTD } from './lists.js';
 import { allProjects, Project } from './project.js';
-import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide } from './dom.js';
+import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions } from './dom.js';
 import { ToDoItem } from './todo.js';
 
 const sidebar = document.getElementById('sidebar');
@@ -19,18 +19,19 @@ sidebar.addEventListener('click', (event) => {
 
     if (event.target.id == 'add-project-back') {
         addProjectView.classList.add('hidden');
-        // clear stuff submitted so far
+
         titleInput.value = '';
         colorInput.value = '#000000';
     }
     if (event.target.id == 'add-project-submit') {
         new Project (titleInput.value, colorInput.value);
         addProjectView.classList.add('hidden');
-        // clear stuff submitted so far
+
         titleInput.value = '';
         colorInput.value = '#000000';
 
         renderProjectsSide(allProjects);
+        projectOptions(allProjects);
     }
 })
 
@@ -65,9 +66,9 @@ main.addEventListener('click', (event) => {
     }
 })
 
-
 // initial functions to run when opens 
 renderProjectsSide(allProjects);
+projectOptions(allProjects);
 
 const upcomingTasks = document.getElementById('upcoming-tasks');
 renderTDArr(upcomingTasks, filterFuture(allTD));

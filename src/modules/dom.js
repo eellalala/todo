@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { allTD, filterWithin, findById, sortByDue} from './lists.js';
-export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide };
+export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions };
 /* remember to separate the function calls with controls.js to avoid clutter later. this should only 
 be dom manipulation things only. event listeners are on controls.js */
 
@@ -127,5 +127,18 @@ function renderProjectsSide (projectArr) {
         projectContainer.id = `side-project-container-${project.id}`;
 
         sidebar.appendChild(projectContainer);
+    })
+}
+
+function projectOptions(projectArr) {
+    const select = document.getElementById('todo-project-input');
+    select.replaceChildren();
+    
+    projectArr.forEach((project) => {
+        const option = document.createElement('option');
+        option.textContent = project.title;
+        option.setAttribute('value', project.title);
+
+        select.appendChild(option);
     })
 }

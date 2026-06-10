@@ -29,6 +29,30 @@
             <h1>My To-Do</h1>
             <button type="button" class="add-btn" id="add-td-btn">+</button>
         </div>
+        <section id="add-todo-view">
+            <h3>Add To-Do</h3>
+            <form>
+                <label for="todo-title-input">To-Do Title:</label>
+                <input type="text" name="todo-title" id="todo-title-input">
+                <label for="todo-duedate-input">Due Date:</label>
+                <input type="date" name="todo-duedate" id="todo-duedate-input">
+                <label for="todo-prio-input">Prority:</label>
+                <select name="todo-prio" id="todo-prio-input">
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+                <label for="todo-project-input">Project:</label>
+                <select name="todo-project" id="todo-project-input">
+                    <option>list of projects</option>
+                </select>
+                <label for="todo-note-input">Note:</label>
+                <input type="text" name="todo-note" id="todo-note-input">
+
+                <button type="button" id="add-todo-back">Back</button>
+                <button type="button" id="add-todo-submit">Add</button>
+            </form>
+        </section>
         <div id="lists-container">
             <section id="upcoming-tasks" class="container">
                 <h3>Upcoming</h3>

@@ -11,7 +11,6 @@ import './modules/todo.js'; // later, change maybe to initialize function in con
 Home page shows most urgent tasks (including overdue section, and upcoming section)
 Sort by Urgency
 exists a default project (titled General/home/default - Grey)
-Define project color options (5 or 6?) with CSS and use window.GetComputedStyle to declare in JS
 
 !!! when checking off list for one, the item should be universally deleted off of all lists too!
 
@@ -19,13 +18,10 @@ Make todo renderings better:
 have an icon that color's changes according to project. 
 Include due date
 
-click on todo to expand
 check button
-edit and delete button (appears when hovering on it)
 
 store to-do objects in an array. and have arrays for the different categories
 
-Essentially, the check and delete buttons have the same functionality. one just feels better
 
 
 NOT SURE WHERE THIS GOES
@@ -34,6 +30,8 @@ let dueThreeDays = all.filterWithin(allTD, 3);
 let dueWeek = all.filterWithin(allTD, 7);
 
 store with localStorage
+Change Add project and todo buttons type to submit instead of button (after localstorage itll persist after refresh)
+potentially add another default color for the projects, otherwise remain as balck.  (see html and controls.js)
 
 Future: Mobile compatibility
 mobile devices don't have hover, so the hover to reveal delete button doesnt work 

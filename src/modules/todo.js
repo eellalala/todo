@@ -26,7 +26,7 @@ class ToDoItem {
 }
 
 // Testing area
-const testTD1 = new ToDoItem('grocery shopping', new Date(2026, 5, 1), 'high', 'life', '');
-const testTD2 = new ToDoItem('dog walk', new Date(2026, 5, 7), 'high', 'life', '');
-const testTD3 = new ToDoItem('cooking', new Date(2026, 5, 13), 'high', 'life', '');
+const testTD1 = new ToDoItem('grocery shopping', new Date(2026, 5, 1), 'High', 'life', 'note');
+const testTD2 = new ToDoItem('dog walk', new Date(2026, 5, 7), 'Medium', 'life', 'note');
+const testTD3 = new ToDoItem('cooking', new Date(2026, 5, 13), 'Low', 'life', 'note');
 

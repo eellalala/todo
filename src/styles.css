@@ -89,11 +89,27 @@ h1 {
     text-align: left;
 }
 
+.high-priority {
+    box-shadow: 3px 4px 0 0 red;
+}
+
+.med-priority {
+    box-shadow: 3px 4px 0 0 yellow;
+}
+
+.low-priority {
+    box-shadow: 3px 4px 0 0 lightgreen;
+}
+
 .todo-container > * {
     margin: 3% 0;
 }
 
 .todo-container > span:not(:first-of-type) { 
+    display: block;
+}
+
+.td-info > * {
     display: block;
 }
 

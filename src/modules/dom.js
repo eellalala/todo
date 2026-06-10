@@ -25,6 +25,10 @@ function renderTD(td, parent) {
         const checkBtn = tDContainer.querySelectorAll('button')[0];
         checkBtn.id = `check-btn-${td.id}`;
 
+        if (td.priority == 'High') tDContainer.classList.add('high-priority');
+        if (td.priority == 'Medium') tDContainer.classList.add('med-priority');
+        if (td.priority == 'Low') tDContainer.classList.add('low-priority');
+
         tDContainer.id = `todo-container-${td.id}`;
 
         parent.appendChild(tDContainer);
@@ -46,10 +50,14 @@ function expandTD(tDId) {
 
     const td = findById(tDId, allTD);
 
-    const tDProject = document.createElement('div');
-    const tDProjectText = document.createElement('span');
-    tDProjectText.textContent = td.project;
-    tDProject.appendChild(tDProjectText);
+    const tDInfo = document.createElement('div');
+    tDInfo.classList.add('td-info');
+    const tDInfoText = document.createElement('span');
+    tDInfoText.textContent = `${td.project}: ${td.priority} Priority`;
+    tDInfo.appendChild(tDInfoText);
+    const tDNote = document.createElement('span');
+    tDNote.textContent = `Note: ${td.note}`;
+    tDInfo.appendChild(tDNote);
     
     const tDDate = tDContainer.querySelectorAll('span')[1];
     tDDate.textContent = `Due: ${format(td.dueDate, 'eeee, MMMM do yyyy')}`;
@@ -66,7 +74,7 @@ function expandTD(tDId) {
     makeBtn('edit');
     makeBtn('delete');
 
-    tDContainer.insertBefore(tDProject, tDDate);
+    tDContainer.insertBefore(tDInfo, tDDate);
 }
 
 function collapseTD(tDId) {
@@ -78,8 +86,8 @@ function collapseTD(tDId) {
     const tDDate = tDContainer.querySelectorAll('span')[2];
     tDDate.textContent = format(td.dueDate, 'eee, MMM d');
 
-    const tDProject = tDContainer.querySelector('div');
-    tDProject.remove();
+    const tDInfo = tDContainer.querySelector('div');
+    tDInfo.remove();
 
     const editBtn = tDContainer.querySelectorAll('button')[1];
     const deleteBtn = tDContainer.querySelectorAll('button')[2];

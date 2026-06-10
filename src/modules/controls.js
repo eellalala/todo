@@ -12,6 +12,12 @@ addProjectBtn.addEventListener('click', () => {
     addProjectView.classList.remove('hidden');
 })
 
+const addTDBtn = document.getElementById('add-td-btn');
+addTDBtn.addEventListener('click', () => {
+    const addTDView = document.getElementById('add-todo-view');
+    addTDView.classList.remove('hidden');
+})
+
 sidebar.addEventListener('click', (event) => {
     const addProjectView = document.getElementById('add-project-view');
     const titleInput = document.getElementById('project-title-input');
@@ -63,6 +69,39 @@ main.addEventListener('click', (event) => {
         if (container.classList.contains('expanded-todo')) {
             collapseTD(id);
         } else expandTD(id);
+    }
+})
+
+main.addEventListener('click', (event) => {
+    const addTDView = document.getElementById('add-todo-view');
+    const titleInput = document.getElementById('todo-title-input');
+    const duedateInput = document.getElementById('todo-duedate-input');
+    const priorityInput = document.getElementById('todo-prio-input');
+    const projectInput = document.getElementById('todo-project-input');
+    const noteInput = document.getElementById('todo-note-input');
+
+    duedateInput.valueAsDate = new Date();
+
+    if (event.target.id == 'add-todo-back') {
+        addTDView.classList.add('hidden');
+
+        titleInput.value = '';
+        noteInput.value = '';
+    }
+    if (event.target.id == 'add-todo-submit') {
+        new ToDoItem (titleInput.value, duedateInput.value, priorityInput.value, projectInput.value, noteInput.value);
+        addTDView.classList.add('hidden');
+
+        titleInput.value = '';
+        noteInput.value = '';
+
+        console.log(allTD);
+
+        // rerendering the displayed page: depends on if user is on home screen or project screen. make into a function for repeated calls. 
+        const upcomingTasks = document.getElementById('upcoming-tasks');
+        renderTDArr(upcomingTasks, filterFuture(allTD));
+        const overdueTasks = document.getElementById('overdue-tasks');
+        renderTDArr(overdueTasks, filterPast(allTD));
     }
 })
 

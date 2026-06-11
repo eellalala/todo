@@ -19,10 +19,13 @@ class ToDoItem {
         this.isDone = !this.isDone;
     }
     
-    /* keep if needed
-    get something(...) {}
-    set something(...) {}
-    */
+    editTD(title, dueDate, priority, project, note) {
+        this.title = title;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.project = project;
+        this.note = note;
+    }
 }
 
 // Testing area

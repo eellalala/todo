@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
-import { allTD, filterWithin, findById, sortByDue} from './lists.js';
-export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions };
+import { allTD, filterPast, filterFuture, filterWithin, findById, sortByDue} from './lists.js';
+export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, reRenderHome, renderProjectsSide, projectOptions };
 /* remember to separate the function calls with controls.js to avoid clutter later. this should only 
 be dom manipulation things only. event listeners are on controls.js */
 
@@ -30,6 +30,18 @@ function renderTD(td, parent) {
 
         const checkBtn = tDContainer.querySelectorAll('button')[0];
         checkBtn.id = `check-btn-${td.id}`;
+
+        const tDEditView = tDContainer.querySelector('div');
+        tDEditView.id = `edit-todo-view-${td.id}`;
+
+        const tDEditProjSelect = tDEditView.querySelector('.todo-project-edit');
+        tDEditProjSelect.id = `todo-project-edit-${td.id}`;
+
+        const editBackBtn = tDContainer.querySelector('.edit-todo-back');
+        editBackBtn.id = `edit-todo-back-${td.id}`;
+
+        const editSubmitBtn = tDContainer.querySelector('.edit-todo-submit');
+        editSubmitBtn.id = `edit-todo-submit-${td.id}`;
 
         if (td.priority == 'High') tDContainer.classList.add('high-priority');
         if (td.priority == 'Medium') tDContainer.classList.add('med-priority');
@@ -95,8 +107,8 @@ function collapseTD(tDId) {
     const tDInfo = tDContainer.querySelector('div');
     tDInfo.remove();
 
-    const editBtn = tDContainer.querySelectorAll('button')[1];
-    const deleteBtn = tDContainer.querySelectorAll('button')[2];
+    const editBtn = tDContainer.querySelector('.edit-btn');
+    const deleteBtn = tDContainer.querySelector('.delete-btn');
     editBtn.remove();
     deleteBtn.remove();
 }
@@ -106,12 +118,11 @@ function removeTD(tDId) {
     tDContainer.remove();
 }
 
-function editTD() {
-    /// !!! when clicking on edit button, shows up popup
-}
-
-function finishEditTD() {
-    //!!! when clicking on done editing, reflects changes
+function reRenderHome() {
+    const upcomingTasks = document.getElementById('upcoming-tasks');
+    renderTDArr(upcomingTasks, filterFuture(allTD));
+    const overdueTasks = document.getElementById('overdue-tasks');
+    renderTDArr(overdueTasks, filterPast(allTD));
 }
 
 function renderProjectsSide (projectArr) { 
@@ -136,8 +147,7 @@ function renderProjectsSide (projectArr) {
     })
 }
 
-function projectOptions(projectArr) {
-    const select = document.getElementById('todo-project-input');
+function projectOptions(select, projectArr) {
     select.replaceChildren();
     
     projectArr.forEach((project) => {

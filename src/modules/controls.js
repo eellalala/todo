@@ -1,6 +1,6 @@
 import { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteTD } from './lists.js';
 import { allProjects, Project } from './project.js';
-import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions } from './dom.js';
+import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, reRenderHome } from './dom.js';
 import { ToDoItem } from './todo.js';
 
 const sidebar = document.getElementById('sidebar');
@@ -37,7 +37,7 @@ sidebar.addEventListener('click', (event) => {
         colorInput.value = '#000000';
 
         renderProjectsSide(allProjects);
-        projectOptions(allProjects);
+        projectOptions(document.getElementById('todo-project-input'), allProjects);
     }
 })
 
@@ -54,10 +54,42 @@ main.addEventListener('click', (event) => {
         td.toggleDone();
     }
     if (target.classList.contains('edit-btn')) {
-        // delete the actual item --  add an ID property for todo with crypto.randomUUID().
-            // how to save the id: when the item is rendered, set the ID of the edit button to edit-btn-ID
-            // then, stringplice the last 36 characters to get the ID again
-        // edit from dom - 1. 
+        const editTDView = document.getElementById(`edit-todo-view-${id}`);
+        projectOptions(document.getElementById(`todo-project-edit-${id}`), allProjects);
+        editTDView.classList.remove('hidden');
+    }
+})
+
+// edit todo functionality 
+main.addEventListener('click', (event) => {
+    const target = event.target;
+
+    if (target.classList.contains('edit-todo-back') || target.classList.contains('edit-todo-submit')) {
+        const id = target.id.slice(-36);
+        const td = findById(id, allTD);
+    
+        const editTDView = document.getElementById(`edit-todo-view-${id}`);
+
+        const newTitle = editTDView.querySelector('.todo-title-edit');
+        const newDueDate = editTDView.querySelector('.todo-duedate-edit');
+        const newPrio = editTDView.querySelector('.todo-prio-edit');
+        const newProject = editTDView.querySelector('.todo-project-edit');
+        const newNote = editTDView.querySelector('.todo-note-edit');
+        
+        function clearEditView() {
+            newTitle.value = '';
+            newNote.value = '';
+            editTDView.classList.add('hidden');
+        }
+
+        if (target.classList.contains('edit-todo-back')) {
+            clearEditView();
+        }
+        if (target.classList.contains('edit-todo-submit')) {
+            td.editTD(newTitle.value, newDueDate.value, newPrio.value, newProject.value, newNote.value);
+            reRenderHome();
+            clearEditView();
+        }
     }
 })
 
@@ -96,16 +128,13 @@ main.addEventListener('click', (event) => {
         console.log(allTD);
 
         // rerendering the displayed page: depends on if user is on home screen or project screen. make into a function for repeated calls. 
-        const upcomingTasks = document.getElementById('upcoming-tasks');
-        renderTDArr(upcomingTasks, filterFuture(allTD));
-        const overdueTasks = document.getElementById('overdue-tasks');
-        renderTDArr(overdueTasks, filterPast(allTD));
+        reRenderHome();
     }
 })
 
 // initial functions to run when opens 
 renderProjectsSide(allProjects);
-projectOptions(allProjects);
+projectOptions(document.getElementById('todo-project-input'), allProjects);
 
 const upcomingTasks = document.getElementById('upcoming-tasks');
 renderTDArr(upcomingTasks, filterFuture(allTD));

@@ -67,6 +67,28 @@
                 <button type="button" class="check-btn"></button>
                 <span class="todo-title">Task Title</span>
                 <span>Due Date</span>
+                <div class ="edit-todo-view hidden">
+                    <h4>Edit To-Do</h4>
+
+                    <label for="todo-title-edit">To-Do Title:</label>
+                    <input type="text" name="todo-title" class="todo-title-edit">
+                    <label for="todo-duedate-edit">Due Date:</label>
+                    <input type="date" name="todo-duedate" class="todo-duedate-edit">
+                    <label for="todo-prio-edit">Prority:</label>
+                    <select name="todo-prio" class="todo-prio-edit">
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                    <label for="todo-project-edit">Project:</label>
+                    <select name="todo-project" class="todo-project-edit">
+                    </select>
+                    <label for="todo-note-edit">Note:</label>
+                    <input type="text" name="todo-note" class="todo-note-edit">
+                    
+                    <button type="button" class="edit-todo-back">Back</button>
+                    <button type="button" class="edit-todo-submit">Confirm</button>
+                </div>
             </div>
         </template>
         <template id="side-project-template">

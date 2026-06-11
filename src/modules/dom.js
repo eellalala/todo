@@ -6,6 +6,12 @@ be dom manipulation things only. event listeners are on controls.js */
 
 
 function renderTDArr(parent, tDArr) {;
+
+    //remove existing children, prevent duplicate render
+    parent.querySelectorAll('.todo-container').forEach(existingTD => {
+        existingTD.remove();
+    })
+
     tDArr.forEach((td) => {
         renderTD(td, parent);
     })

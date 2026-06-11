@@ -33,6 +33,9 @@ store with localStorage
 Change Add project and todo buttons type to submit instead of button (after localstorage itll persist after refresh)
 potentially add another default color for the projects, otherwise remain as balck.  (see html and controls.js)
 
+MAKE TITLE AND DATE FOR TODO MANDANTORY 
+set predetermined date to today 
+
 Future: Mobile compatibility
 mobile devices don't have hover, so the hover to reveal delete button doesnt work 
 Better optimizination

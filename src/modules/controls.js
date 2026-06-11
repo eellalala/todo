@@ -80,8 +80,6 @@ main.addEventListener('click', (event) => {
     const projectInput = document.getElementById('todo-project-input');
     const noteInput = document.getElementById('todo-note-input');
 
-    duedateInput.valueAsDate = new Date();
-
     if (event.target.id == 'add-todo-back') {
         addTDView.classList.add('hidden');
 

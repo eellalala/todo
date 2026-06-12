@@ -27,7 +27,7 @@ set predetermined date to today
 
 Future: Mobile compatibility
 
-use proejct id more 
+use proejct id more, currently proejct relies on title which can pose problems if two proj have ths ame title
 
 check if colors are light enough and usedark text when making own projects , for better robustness and accessibility
 

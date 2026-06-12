@@ -1,19 +1,19 @@
-import { allTD } from './lists.js';
-import { addTDProj, removeTDProj } from './project.js';
+import { allTD, findProjByTitle } from './lists.js';
+import { addTDProj, removeTDProj, allProjects } from './project.js';
 export { ToDoItem };
 
 class ToDoItem {
     isDone = false;
 
-    constructor(title, dueDate, priority, project, note) {
+    constructor(title, dueDate, priority, projectT, note) {
         this.title = title;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.project = project;
+        this.project = projectT;
         this.note = note;
         this.id = crypto.randomUUID();
 
-        addTD(project, this);
+        addTDProj(findProjByTitle(projectT, allProjects), this);
         allTD.unshift(this);
     }
 
@@ -21,16 +21,18 @@ class ToDoItem {
         this.isDone = !this.isDone;
     }
     
-    editTD(title, dueDate, priority, project, note) {
-        removeTD(this.project, this); 
+    editTD(title, dueDate, priority, projectT, note) {
+        const oldProjectArr = findProjByTitle(this.project, allProjects);
+        const newProjectArr = findProjByTitle(project, allProjects);;
+        removeTDProj(oldProjectArr, this); 
 
         this.title = title;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.project = project;
+        this.project = projectT;
         this.note = note;
 
-        addTD(project, this);
+        addTDProj(newProjectArr, this);
     }
 }
 

@@ -17,11 +17,11 @@ class Project {
 
 function addTDProj(project, td) {
     project.tasks.push(td);
-    sortByDue(project);
+    sortByDue(project.tasks);
 }
 
 function removeTDProj(project, td) {
-    project.splice(findIndexById(td.id, project), 1);
+    project.tasks.splice(findIndexById(td.id, project), 1);
 }
 
 // initialize default project

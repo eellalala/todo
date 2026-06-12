@@ -1,6 +1,6 @@
 import { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteTD, findProjByTitle } from './lists.js';
 import { allProjects, Project } from './project.js';
-import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, reRenderHome, renderProjectView } from './dom.js';
+import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, reRenderHome, renderProjectView, unRenderProjectView } from './dom.js';
 import { ToDoItem } from './todo.js';
 
 const sidebar = document.getElementById('sidebar');
@@ -134,9 +134,15 @@ main.addEventListener('click', (event) => {
 
 sidebar.addEventListener('click', (event) => {
     if (event.target.matches('.side-project-container span')) {
-        const projectTitle = event.target.textContent;
-        const project = findProjByTitle(projectTitle, allProjects);
-        renderProjectView(project); //pass in project object
+        const listsContainer = document.getElementById('lists-container');
+        if (!listsContainer.classList.contains('hidden')) {
+            const projectTitle = event.target.textContent;
+            const project = findProjByTitle(projectTitle, allProjects);
+            renderProjectView(project); 
+        } else {
+            listsContainer.classList.remove('hidden');
+            unRenderProjectView();
+        }
     }
 })
 

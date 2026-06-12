@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { allTD, filterPast, filterFuture, filterWithin, findById, sortByDue} from './lists.js';
-export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, reRenderHome, renderProjectsSide, projectOptions, renderProjectView };
+export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, reRenderHome, renderProjectsSide, projectOptions, renderProjectView, unRenderProjectView };
 /* remember to separate the function calls with controls.js to avoid clutter later. this should only 
 be dom manipulation things only. event listeners are on controls.js */
 
@@ -158,9 +158,21 @@ function projectOptions(select, projectArr) {
 }
 
 function renderProjectView(project) {
-    const projectView = document.createElement('section');
+    document.getElementById('lists-container').classList.add('hidden');
 
-    const projectHead = document.createElement('h3');
+    const projectView = document.createElement('section');
+    projectView.id = 'project-view';
+
+    const projectHead = document.createElement('h2');
     projectHead.textContent = project.title;
     projectView.appendChild(projectHead);
+
+    renderTDArr(projectView, project.tasks);
+
+    document.getElementById('main').appendChild(projectView);
+}
+
+function unRenderProjectView() {
+    document.getElementById('lists-container').classList.remove('hidden');
+    document.getElementById('project-view').remove();
 }

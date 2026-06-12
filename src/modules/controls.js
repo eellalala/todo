@@ -142,22 +142,3 @@ renderTDArr(upcomingTasks, filterFuture(allTD));
 const overdueTasks = document.getElementById('overdue-tasks');
 renderTDArr(overdueTasks, filterPast(allTD));
 
-//testing area 
-
-const projectsTestBtn = document.getElementById('projects-test-btn');
-projectsTestBtn.addEventListener('click', () => {
-    renderProjectsSide(allProjects);
-})
-
-const upcomingTestBtn = document.getElementById('upcoming-test-btn');
-upcomingTestBtn.addEventListener('click', () => {
-    const upcomingTasks = document.getElementById('upcoming-tasks');
-    renderTDArr(upcomingTasks, filterFuture(allTD));
-
-})
-
-const overdueTestBtn = document.getElementById('overdue-test-btn');
-overdueTestBtn.addEventListener('click', () => {
-    const overdueTasks = document.getElementById('overdue-tasks');
-    renderTDArr(overdueTasks, filterPast(allTD));
-})

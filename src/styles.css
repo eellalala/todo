@@ -1,30 +1,23 @@
- /* 
- Aquarium Style. 
- Mofusand Cat sea profile picture.
- Secondary colours (for different topics) are corals. 
- */
- :root {
-    --background-color: rgb(184, 221, 233);
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
+
+:root {
+    --primary-color: rgb(184, 221, 233);
+    --primary-dark: rgb(118, 188, 212);
     --secondary-color: white;
+    --secondary-dark: rgb(235, 239, 246);
+    --tertiary-color:  rgb(210, 233, 236);
     --text-color: rgb(49, 46, 73);
 
-    --project-color-1: #E68500;
-    --project-color-2: #BD5058;
-    --project-color-3: #6493B6;
-    --project-color-4: #9296A5;
-    --project-color-5: #D8ADCD;
-    --project-color-1-light: orange;
-    --project-color-2-light: orange;
-    --project-color-3-light: orange;
-    --project-color-4-light: orange;
-    --project-color-5-light: orange;
- }
+    --high-prio-color: rgb(239, 188, 206);
+    --med-prio-color: rgb(248, 239, 195);
+    --low-prio-color: rgb(184, 233, 208);
+}
 
- body {
+body {
     display: flex;
     flex-direction: row;
-    font-family: sans-serif;
-    background-color: var(--background-color);
+    font-family: Cabin, sans-serif;
+    background-color: var(--primary-color);
     color: var(--text-color);
 
     box-sizing: border-box;
@@ -34,16 +27,31 @@
     display: none;
 }
 
+#side-heading, #heading {
+    display: flex;
+    align-items: center;
+}
+
 #sidebar {
     background-color: var(--secondary-color);
     padding: 1.5%;
-    margin: 0.5% 1% 0 0;
+    margin: 3.5% 2% 0 2%;
 
     border-radius: 20px;
 }
 
 #sidebar-head {
     display: inline-block;
+}
+
+
+#add-project-view {
+    background-color: var(--tertiary-color);
+
+    padding: 2% 3% 5% 3%;
+
+    border-radius: 12px;
+    box-shadow: 1px 2px 0 2px var(--primary-color);
 }
 
 .side-project-container {
@@ -53,6 +61,32 @@
     text-align: center;
     color: var(--secondary-color);
     /* make it lighter when clicked */
+}
+
+#add-project-btn {
+    width: 35px;
+    height: 35px;
+}
+
+.add-btn {
+    all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--secondary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+
+    font-size: 2em;
+    
+    margin: 2%;
+    border: 2px solid var(--primary-dark);
+}
+
+.add-btn:active {
+    border: 2px solid var(--primary-color);
 }
 
 #main {
@@ -90,15 +124,15 @@ h1 {
 }
 
 .high-priority {
-    box-shadow: 3px 4px 0 0 red;
+    box-shadow: 3px 4px 0 0 var(--high-prio-color);
 }
 
 .med-priority {
-    box-shadow: 3px 4px 0 0 yellow;
+    box-shadow: 3px 4px 0 0 var(--med-prio-color);
 }
 
 .low-priority {
-    box-shadow: 3px 4px 0 0 lightgreen;
+    box-shadow: 3px 4px 0 0 var(--low-prio-color);
 }
 
 .todo-container > * {
@@ -116,8 +150,32 @@ h1 {
 .check-btn {
     all: unset;
     display: inline-block;
-    min-width: 10px;
-    min-height: 10px;
+    min-width: 13px;
+    min-height: 13px;
     background-color: var(--secondary-color);
     border: 2px solid var(--text-color);
+}
+
+#add-todo-view {
+    background-color: var(--secondary-color);
+
+    padding: 2% 3% 5% 3%;
+
+    border-radius: 15px;
+    box-shadow: 2px 3px 0 2px var(--secondary-dark);
+}
+
+form > *:not(button) {
+    display: block;
+    margin: 3%;
+}
+
+form > button, .todo-container > button:not(.check-btn) {
+    all: unset;
+    background-color: var(--secondary-color);
+    border: 2px solid var(--tertiary-color);
+    border-radius: 6px;
+
+    padding: 2% 4%;
+    margin: 2%;
 }

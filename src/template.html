@@ -7,10 +7,11 @@
 </head>
 <body>
     <div id="sidebar">
-        <h2 id="sidebar-head">My Projects</h2>
-        <button type="button" class="add-btn" id="add-project-btn">+</button>
-        <button type="button" id="projects-test-btn">Render Test Button</button>
-        <section id="add-project-view">
+        <div id="side-heading">
+            <h2 id="sidebar-head">My Projects</h2>
+            <button type="button" class="add-btn" id="add-project-btn">+</button>
+        </div>
+        <section id="add-project-view" class="hidden">
             <h3>Add Project</h3>
             <form>
                 <label for="project-title-input">Project Title:</label>
@@ -29,7 +30,7 @@
             <h1>My To-Do</h1>
             <button type="button" class="add-btn" id="add-td-btn">+</button>
         </div>
-        <section id="add-todo-view">
+        <section id="add-todo-view" class="hidden">
             <h3>Add To-Do</h3>
             <form>
                 <label for="todo-title-input">To-Do Title:</label>
@@ -55,11 +56,9 @@
         <div id="lists-container">
             <section id="upcoming-tasks" class="container">
                 <h3>Upcoming</h3>
-                <button type="button" id="upcoming-test-btn">Render Test Button</button>
             </section>
             <section id="overdue-tasks" class="container">
                 <h3>Overdue</h3>
-                <button type="button" id="overdue-test-btn">Render Test Button</button>
             </section>
         </div>
         <template id="todo-template">
@@ -69,25 +68,25 @@
                 <span>Due Date</span>
                 <div class ="edit-todo-view hidden">
                     <h4>Edit To-Do</h4>
-
-                    <label for="todo-title-edit">To-Do Title:</label>
-                    <input type="text" name="todo-title" class="todo-title-edit">
-                    <label for="todo-duedate-edit">Due Date:</label>
-                    <input type="date" name="todo-duedate" class="todo-duedate-edit">
-                    <label for="todo-prio-edit">Prority:</label>
-                    <select name="todo-prio" class="todo-prio-edit">
-                        <option value="high">High</option>
-                        <option value="medium">Medium</option>
-                        <option value="low">Low</option>
-                    </select>
-                    <label for="todo-project-edit">Project:</label>
-                    <select name="todo-project" class="todo-project-edit">
-                    </select>
-                    <label for="todo-note-edit">Note:</label>
-                    <input type="text" name="todo-note" class="todo-note-edit">
+                    <form>
+                        <label for="todo-title-edit">To-Do Title:</label>
+                        <input type="text" name="todo-title" class="todo-title-edit">
+                        <label for="todo-duedate-edit">Due Date:</label>
+                        <label for="todo-prio-edit">Prority:</label>
+                        <select name="todo-prio" class="todo-prio-edit">
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                        <label for="todo-project-edit">Project:</label>
+                        <select name="todo-project" class="todo-project-edit">
+                        </select>
+                        <label for="todo-note-edit">Note:</label>
+                        <input type="text" name="todo-note" class="todo-note-edit">
                     
-                    <button type="button" class="edit-todo-back">Back</button>
-                    <button type="button" class="edit-todo-submit">Confirm</button>
+                        <button type="button" class="edit-todo-back">Back</button>
+                        <button type="button" class="edit-todo-submit">Confirm</button>
+                    </form>
                 </div>
             </div>
         </template>

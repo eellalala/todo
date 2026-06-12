@@ -12,22 +12,11 @@ Home page shows most urgent tasks (including overdue section, and upcoming secti
 Sort by Urgency
 exists a default project (titled General/home/default - Grey)
 
-!!! when checking off list for one, the item should be universally deleted off of all lists too!
-
 Make todo renderings better: 
 have an icon that color's changes according to project. 
 Include due date
 
 check button
-
-store to-do objects in an array. and have arrays for the different categories
-
-
-
-NOT SURE WHERE THIS GOES
-let dueToday = filterWithin(allTD, 1);
-let dueThreeDays = all.filterWithin(allTD, 3);
-let dueWeek = all.filterWithin(allTD, 7);
 
 store with localStorage
 Change Add project and todo buttons type to submit instead of button (after localstorage itll persist after refresh)
@@ -37,7 +26,11 @@ MAKE TITLE AND DATE FOR TODO MANDANTORY
 set predetermined date to today 
 
 Future: Mobile compatibility
-mobile devices don't have hover, so the hover to reveal delete button doesnt work 
+
+use proejct id more 
+
+check if colors are light enough and usedark text when making own projects , for better robustness and accessibility
+
 Better optimizination
 Whiel quicksort is quite efficient, there could be improvememnts made in how it is called and where.
 Also, when new items are added the entire lists are re-rendered rather than just adding on the new item 

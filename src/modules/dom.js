@@ -26,7 +26,7 @@ function renderTD(td, parent) {
         tDTitle.textContent = td.title;
         tDTitle.id = `todo-title-${td.id}`;
         const tDDate = tDContainer.querySelectorAll('span')[1];
-        tDDate.textContent = format(td.dueDate, 'eee MMM d');
+        tDDate.textContent = `Due: ${format(td.dueDate, 'eeee, MMMM do yyyy')}`;
 
         const checkBtn = tDContainer.querySelectorAll('button')[0];
         checkBtn.id = `check-btn-${td.id}`;
@@ -43,9 +43,9 @@ function renderTD(td, parent) {
         const editSubmitBtn = tDContainer.querySelector('.edit-todo-submit');
         editSubmitBtn.id = `edit-todo-submit-${td.id}`;
 
-        if (td.priority == 'High') tDContainer.classList.add('high-priority');
-        if (td.priority == 'Medium') tDContainer.classList.add('med-priority');
-        if (td.priority == 'Low') tDContainer.classList.add('low-priority');
+        if (td.priority == 'high') tDContainer.classList.add('high-priority');
+        if (td.priority == 'medium') tDContainer.classList.add('med-priority');
+        if (td.priority == 'low') tDContainer.classList.add('low-priority');
 
         tDContainer.id = `todo-container-${td.id}`;
 
@@ -71,7 +71,7 @@ function expandTD(tDId) {
     const tDInfo = document.createElement('div');
     tDInfo.classList.add('td-info');
     const tDInfoText = document.createElement('span');
-    tDInfoText.textContent = `${td.project}: ${td.priority} Priority`;
+    tDInfoText.textContent = `Project: ${td.project}`;
     tDInfo.appendChild(tDInfoText);
     const tDNote = document.createElement('span');
     tDNote.textContent = `Note: ${td.note}`;
@@ -85,6 +85,7 @@ function expandTD(tDId) {
         btn.type = 'button';
         btn.classList.add(`${type}-btn`);
         btn.id = `${type}-btn-${td.id}`;
+        btn.textContent = type.charAt(0).toUpperCase() + type.slice(1);
 
         tDContainer.appendChild(btn);
     }
@@ -100,9 +101,6 @@ function collapseTD(tDId) {
     tDContainer.classList.remove('expanded-todo'); 
 
     const td = findById(tDId, allTD);
-
-    const tDDate = tDContainer.querySelectorAll('span')[2];
-    tDDate.textContent = format(td.dueDate, 'eee, MMM d');
 
     const tDInfo = tDContainer.querySelector('div');
     tDInfo.remove();

@@ -74,7 +74,7 @@ function expandTD(tDId) {
     const tDInfo = document.createElement('div');
     tDInfo.classList.add('td-info');
     const tDInfoText = document.createElement('span');
-    tDInfoText.textContent = `Project: ${td.project}`;
+    tDInfoText.textContent = `Project: ${td.projectTitle}`;
     tDInfo.appendChild(tDInfoText);
     const tDNote = document.createElement('span');
     tDNote.textContent = `Note: ${td.note}`;

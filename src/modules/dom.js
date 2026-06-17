@@ -131,7 +131,7 @@ function reRenderHome() {
         tDContainer.id = `${containerName}-tasks`;
 
         const containerHead = document.createElement('h3');
-        containerHead.textContent = containerName;
+        containerHead.textContent = capitalizeFirst(containerName);
         tDContainer.appendChild(containerHead);
 
         renderTDArr(tDContainer, tDArr);

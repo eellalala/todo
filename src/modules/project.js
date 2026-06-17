@@ -1,4 +1,4 @@
-import { findById, sortByDue } from './lists.js';
+import { findById, findIndexById, sortByDue } from './lists.js';
 export { allProjects, Project, addTDProj, removeTDProj };
 
 const allProjects = []; // projects are stored as array of array .
@@ -21,7 +21,7 @@ function addTDProj(project, td) {
 }
 
 function removeTDProj(project, td) {
-    project.tasks.splice(findIndexById(td.id, project), 1);
+    project.tasks.splice(findIndexById(td.id, project.tasks), 1);
 }
 
 // initialize default project

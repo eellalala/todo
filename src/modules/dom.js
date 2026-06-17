@@ -4,6 +4,9 @@ export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, reRend
 /* remember to separate the function calls with controls.js to avoid clutter later. this should only 
 be dom manipulation things only. event listeners are on controls.js */
 
+function capitalizeFirst(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 function renderTDArr(parent, tDArr) {;
 
@@ -85,7 +88,7 @@ function expandTD(tDId) {
         btn.type = 'button';
         btn.classList.add(`${type}-btn`);
         btn.id = `${type}-btn-${td.id}`;
-        btn.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+        btn.textContent = capitalizeFirst(type);
 
         tDContainer.appendChild(btn);
     }
@@ -117,10 +120,29 @@ function removeTD(tDId) {
 }
 
 function reRenderHome() {
-    const upcomingTasks = document.getElementById('upcoming-tasks');
-    renderTDArr(upcomingTasks, filterFuture(allTD));
-    const overdueTasks = document.getElementById('overdue-tasks');
-    renderTDArr(overdueTasks, filterPast(allTD));
+    if (document.getElementById('lists-container')) document.getElementById('lists-container').remove();
+
+    const listsContainer = document.createElement('div');
+    listsContainer.id = 'lists-container';
+
+    function makeTDContainer(containerName, tDArr) {
+        const tDContainer = document.createElement('section');
+        tDContainer.classList.add('container-for-todos');
+        tDContainer.id = `${containerName}-tasks`;
+
+        const containerHead = document.createElement('h3');
+        containerHead.textContent = containerName;
+        tDContainer.appendChild(containerHead);
+
+        renderTDArr(tDContainer, tDArr);
+
+        listsContainer.appendChild(tDContainer);
+    }
+
+    makeTDContainer('upcoming', filterFuture(allTD));
+    makeTDContainer('overdue', filterPast(allTD));
+
+    document.getElementById('main').appendChild(listsContainer);
 }
 
 function renderProjectsSide (projectArr) { 
@@ -158,7 +180,7 @@ function projectOptions(select, projectArr) {
 }
 
 function renderProjectView(project) {
-    document.getElementById('lists-container').classList.add('hidden');
+    document.getElementById('lists-container').remove();
 
     const projectView = document.createElement('section');
     projectView.id = 'project-view';
@@ -168,59 +190,12 @@ function renderProjectView(project) {
     projectHead.textContent = project.title;
     projectView.appendChild(projectHead);
 
-    renderProjTDs(projectView, project.tasks);
+    renderTDArr(projectView, project.tasks);
 
     document.getElementById('main').appendChild(projectView);
 }
 
 function unRenderProjectView() {
-    document.getElementById('lists-container').classList.remove('hidden');
+    reRenderHome();
     document.getElementById('project-view').remove();
-}
-
-function renderProjTDs(parent, tDArr) {;
-
-    //remove existing children, prevent duplicate render
-    parent.querySelectorAll('.todo-container').forEach(existingTD => {
-        existingTD.remove();
-    })
-
-    tDArr.forEach((td) => {
-        renderProjTD(td, parent);
-    })
-}
-
-function renderProjTD(td, parent) {
-        const tDTemplate = document.getElementById('todo-template');
-
-        const tDItem = tDTemplate.content.cloneNode(true);
-        const tDContainer = tDItem.querySelector('div');
-        const tDTitle = tDContainer.querySelectorAll('span')[0];
-        tDTitle.textContent = td.title;
-        tDTitle.id = `projV-todo-title-${td.id}`;
-        const tDDate = tDContainer.querySelectorAll('span')[1];
-        tDDate.textContent = `Due: ${format(td.dueDate, 'eeee, MMMM do yyyy')}`;
-
-        const checkBtn = tDContainer.querySelectorAll('button')[0];
-        checkBtn.id = `projV-check-btn-${td.id}`;
-
-        const tDEditView = tDContainer.querySelector('div');
-        tDEditView.id = `projV-edit-todo-view-${td.id}`;
-
-        const tDEditProjSelect = tDEditView.querySelector('.todo-project-edit');
-        tDEditProjSelect.id = `projV-todo-project-edit-${td.id}`;
-
-        const editBackBtn = tDContainer.querySelector('.edit-todo-back');
-        editBackBtn.id = `projV-edit-todo-back-${td.id}`;
-
-        const editSubmitBtn = tDContainer.querySelector('.edit-todo-submit');
-        editSubmitBtn.id = `projV-edit-todo-submit-${td.id}`;
-
-        if (td.priority == 'high') tDContainer.classList.add('high-priority');
-        if (td.priority == 'medium') tDContainer.classList.add('med-priority');
-        if (td.priority == 'low') tDContainer.classList.add('low-priority');
-
-        tDContainer.id = `projV-todo-container-${td.id}`;
-
-        parent.appendChild(tDContainer);
 }

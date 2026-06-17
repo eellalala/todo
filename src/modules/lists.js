@@ -1,6 +1,6 @@
 import { isWithinInterval, startOfDay, addDays, isBefore, isSameDay } from 'date-fns';
 
-export { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteTD, findProjByTitle};
+export { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, findIndexById, deleteTD, findProjByTitle};
 
 const allTD = [];
 

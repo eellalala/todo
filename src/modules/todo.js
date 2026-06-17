@@ -5,15 +5,15 @@ export { ToDoItem };
 class ToDoItem {
     isDone = false;
 
-    constructor(title, dueDate, priority, projectT, note) {
+    constructor(title, dueDate, priority, projectTitle, note) {
         this.title = title;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.project = projectT;
+        this.projectTitle = projectTitle;
         this.note = note;
         this.id = crypto.randomUUID();
 
-        addTDProj(findProjByTitle(projectT, allProjects), this);
+        addTDProj(findProjByTitle(projectTitle, allProjects), this);
         allTD.unshift(this);
     }
 
@@ -21,15 +21,15 @@ class ToDoItem {
         this.isDone = !this.isDone;
     }
     
-    editTD(title, dueDate, priority, projectT, note) {
-        const oldProjectArr = findProjByTitle(this.project, allProjects);
-        const newProjectArr = findProjByTitle(project, allProjects);;
+    editTD(title, dueDate, priority, projectTitle, note) {
+        const oldProjectArr = findProjByTitle(this.projectTitle, allProjects);
+        const newProjectArr = findProjByTitle(projectTitle, allProjects);;
         removeTDProj(oldProjectArr, this); 
 
         this.title = title;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.project = projectT;
+        this.projectTitle = projectTitle;
         this.note = note;
 
         addTDProj(newProjectArr, this);

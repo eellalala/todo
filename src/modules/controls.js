@@ -134,13 +134,11 @@ main.addEventListener('click', (event) => {
 
 sidebar.addEventListener('click', (event) => {
     if (event.target.matches('.side-project-container span')) {
-        const listsContainer = document.getElementById('lists-container');
-        if (!listsContainer.classList.contains('hidden')) {
+        if (!!document.getElementById('lists-container')) { //CHANGE TO DOES IT EXIST
             const projectTitle = event.target.textContent;
             const project = findProjByTitle(projectTitle, allProjects);
             renderProjectView(project); 
         } else {
-            listsContainer.classList.remove('hidden');
             unRenderProjectView();
         }
     }

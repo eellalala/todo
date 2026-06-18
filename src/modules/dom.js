@@ -201,9 +201,11 @@ function renderProjectView(project) {
 
         projectView.appendChild(btn);
     }
-    
-    makeBtn('edit');
-    makeBtn('delete');
+
+    if (project.id != '00000000-0000-0000-0000-000000000000') {
+        makeBtn('edit');
+        makeBtn('delete');
+    }
 
     document.getElementById('main').appendChild(projectView);
 }
@@ -215,16 +217,12 @@ function unRenderProjectView() {
 
 function deleteProjMsg(id, allProjects) {
     const projectView = document.getElementById('project-view');
-    const deleteMsg = document.createElement('p');
-    const project = findById(id, allProjects);
-    
-    if (id == '00000000-0000-0000-0000-000000000000') {
-        deleteMsg.textContent = `The ${project.title} project cannot be deleted!`;
-        projectView.appendChild(deleteMsg);
-    } else {
-        projectView.replaceChildren();
-        deleteMsg.textContent = `${project.title} deleted!`;
-    }
 
-    projectView.appendChild(deleteMsg);
+    projectView.replaceChildren();
+
+    const project = findById(id, allProjects);
+    const deletedMsg = document.createElement('p');
+    deletedMsg.textContent = `${project.title} deleted!`;
+
+    projectView.appendChild(deletedMsg);
 }

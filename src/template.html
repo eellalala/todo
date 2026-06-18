@@ -96,6 +96,21 @@
                 <span>Project Title</span>
             </div>
         </template>
+        <template id="project-edit-template">
+            <div class ="edit-project-view hidden">
+                <h4>Edit To-Do</h4>
+                <form>
+                    <label for="project-title-edit">Project Title:</label>
+                    <input type="text" name="project-title" class="project-title-edit">
+
+                    <label for="project-color-edit">Project Color:</label>
+                    <input type="color" name="project-color" class="project-color-edit" colorspace="display-p3">
+
+                    <button type="button" class="edit-project-back">Back</button>
+                    <button type="button" class="edit-project-submit">Confirm</button>
+                </form>
+            </div>
+        </template>
     </div>
 </body>
 </html>

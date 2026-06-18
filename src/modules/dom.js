@@ -182,6 +182,8 @@ function projectOptions(select, projectArr) {
 function renderProjectView(project) {
     document.getElementById('lists-container').remove();
 
+    const id = project.id
+
     const projectView = document.createElement('section');
     projectView.id = 'project-view';
     projectView.classList.add('container-for-todos');
@@ -196,16 +198,29 @@ function renderProjectView(project) {
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.classList.add(`${type}-project-btn`);
-        btn.id = `${type}-project-btn-${project.id}`;
+        btn.id = `${type}-project-btn-${id}`;
         btn.textContent = capitalizeFirst(type);
 
         projectView.appendChild(btn);
     }
 
-    if (project.id != '00000000-0000-0000-0000-000000000000') {
+    if (id != '00000000-0000-0000-0000-000000000000') {
         makeBtn('edit');
         makeBtn('delete');
     }
+
+    // render edit view
+    const editViewClone = document.getElementById('project-edit-template').content.cloneNode(true);
+    const editView = editViewClone.querySelector('div');
+    editView.id = `edit-project-view-${id}`;
+
+    const editBackBtn = editView.querySelector('.edit-project-back');
+    editBackBtn.id = `edit-project-back-${id}`;
+
+    const editSubmitBtn = editView.querySelector('.edit-project-submit');
+    editSubmitBtn.id = `edit-project-submit-${id}`;
+
+    projectView.appendChild(editView);
 
     document.getElementById('main').appendChild(projectView);
 }

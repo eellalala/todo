@@ -97,7 +97,6 @@ main.addEventListener('click', (event) => {
     if (event.target.classList.contains('todo-title')) {
         const id = event.target.id.slice(-36);
         const container = document.getElementById(`todo-container-${id}`);
-        console.log(container.classList);
         if (container.classList.contains('expanded-todo')) {
             collapseTD(id);
         } else expandTD(id);
@@ -125,8 +124,6 @@ main.addEventListener('click', (event) => {
         titleInput.value = '';
         noteInput.value = '';
 
-        console.log(allTD);
-
         // rerendering the displayed page: depends on if user is on home screen or project screen. make into a function for repeated calls. 
         reRenderHome();
     }
@@ -134,42 +131,68 @@ main.addEventListener('click', (event) => {
 
 sidebar.addEventListener('click', (event) => {
     if (event.target.matches('.side-project-container span')) {
+        const projectTitle = event.target.textContent;
+        const project = findProjByTitle(projectTitle, allProjects);
         if (!!document.getElementById('lists-container')) { //CHANGE TO DOES IT EXIST
-            const projectTitle = event.target.textContent;
-            const project = findProjByTitle(projectTitle, allProjects);
             renderProjectView(project); 
         } else {
             unRenderProjectView();
+            renderProjectView(project);
         }
     }
 })
 
-/* Editing and delete project function: 
-Open edit screen and functionality like editing todo. 
-Functionality like deleting todo, but with one caveat. 
-Change "Home" Project name to "unsorted"
-
-Unsorted cannot be deleted or edited.
-If project.id is the original unsorted one, do not make buttons.
-
-*/
+//project edit and delete
 main.addEventListener('click', (event) => {
     const target = event.target;
     const id = target.id.slice(-36);
     if (target.classList.contains('delete-project-btn')) {
         deleteProjMsg(id, allProjects);
-        if (id == '00000000-0000-0000-0000-000000000000') {
-            return;
-        } else {
-            deleteItem(id, allProjects);
-            renderProjectsSide(allProjects);
-        }
+        deleteItem(id, allProjects);
+        renderProjectsSide(allProjects);
     }
     if (target.classList.contains('edit-project-btn')) {
-        const editProjview = document.getElementById(`edit-project-view-${id}`); // implement render project edit view when rendering project
+        const editProjView = document.getElementById(`edit-project-view-${id}`); // implement render project edit view when rendering project
         editProjView.classList.remove('hidden');
     }
 })
+
+// edit project functionality 
+main.addEventListener('click', (event) => {
+    const target = event.target;
+
+    if (target.classList.contains('edit-project-back') || target.classList.contains('edit-project-submit')) {
+        const id = target.id.slice(-36);
+        const project = findById(id, allProjects);
+
+        const editProjView = document.getElementById(`edit-project-view-${id}`);
+
+        const newTitle = editProjView.querySelector('.project-title-edit');
+        const newColor = editProjView.querySelector('.project-color-edit');
+        
+        function clearEditView() {
+            newTitle.value = '';
+            newColor.value = '';
+            editProjView.classList.add('hidden');
+        }
+
+        if (target.classList.contains('edit-project-back')) {
+            clearEditView();
+        }
+        if (target.classList.contains('edit-project-submit')) {
+            project.editProj(newTitle.value, newColor.value);
+            renderProjectsSide(allProjects);
+            unRenderProjectView();
+            renderProjectView(project);
+            clearEditView();
+        }
+    }
+})
+
+/*
+currently, to switch between projects, it renders ome page first instead of cleanrly swithching
+click my todo to go back to home 
+*/
 
 // initial functions to run when opens 
 renderProjectsSide(allProjects);

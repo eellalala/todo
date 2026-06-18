@@ -13,6 +13,11 @@ class Project {
 
         allProjects.push(this);
     }
+
+    editProj(title, color) {
+        this.title = title;
+        this.color = color;
+    }
 }
 
 function addTDProj(project, td) {

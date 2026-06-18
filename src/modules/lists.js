@@ -59,8 +59,8 @@ function findIndexById(id, arr) {
     return arr.findIndex((item) => item.id === id);
 }
 
-function findById(id, tDArr) {
-    return tDArr.find((td) => td.id === id);
+function findById(id, arr) {
+    return arr.find((item) => item.id === id);
 }
 
 function deleteItem(id, arr) {

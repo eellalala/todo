@@ -6,10 +6,10 @@ const allProjects = []; // projects are stored as array of array .
 class Project {
     tasks = [];
 
-    constructor(title, color) {
+    constructor(title, color, id) {
         this.title = title;
         this.color = color; //based on what's filled in the form when the user clicks submit
-        this.id = crypto.randomUUID();
+        id == undefined ? this.id = crypto.randomUUID() : this.id = id;
 
         allProjects.push(this);
     }
@@ -24,5 +24,5 @@ function removeTDProj(project, td) {
     project.tasks.splice(findIndexById(td.id, project.tasks), 1);
 }
 
-// initialize default project
-const testPro1 = new Project('Home', '#8f9ca1');
+// initialize unsorted default project
+const unsortedProj = new Project('Unsorted', '#8f9ca1', '00000000-0000-0000-0000-000000000000');

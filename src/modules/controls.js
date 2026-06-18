@@ -1,6 +1,6 @@
 import { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteItem, findProjByTitle } from './lists.js';
 import { allProjects, Project } from './project.js';
-import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, reRenderHome, renderProjectView, unRenderProjectView, removeProj } from './dom.js';
+import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, reRenderHome, renderProjectView, unRenderProjectView, deleteProjMsg } from './dom.js';
 import { ToDoItem } from './todo.js';
 
 const sidebar = document.getElementById('sidebar');
@@ -157,9 +157,13 @@ main.addEventListener('click', (event) => {
     const target = event.target;
     const id = target.id.slice(-36);
     if (target.classList.contains('delete-project-btn')) {
-        deleteItem(id, allProjects);      
-        removeProj(id);
-        console.log(allProjects);
+        deleteProjMsg(id, allProjects);
+        if (id == '00000000-0000-0000-0000-000000000000') {
+            return;
+        } else {
+            deleteItem(id, allProjects);
+            renderProjectsSide(allProjects);
+        }
     }
     if (target.classList.contains('edit-project-btn')) {
         const editProjview = document.getElementById(`edit-project-view-${id}`); // implement render project edit view when rendering project

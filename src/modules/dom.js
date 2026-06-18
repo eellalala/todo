@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { allTD, filterPast, filterFuture, filterWithin, findById, sortByDue} from './lists.js';
-export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, reRenderHome, renderProjectsSide, projectOptions, renderProjectView, unRenderProjectView, removeProj};
+export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, reRenderHome, renderProjectsSide, projectOptions, renderProjectView, unRenderProjectView, deleteProjMsg};
 /* remember to separate the function calls with controls.js to avoid clutter later. this should only 
 be dom manipulation things only. event listeners are on controls.js */
 
@@ -213,6 +213,18 @@ function unRenderProjectView() {
     document.getElementById('project-view').remove();
 }
 
-function removeProj() {
+function deleteProjMsg(id, allProjects) {
+    const projectView = document.getElementById('project-view');
+    const deleteMsg = document.createElement('p');
+    const project = findById(id, allProjects);
+    
+    if (id == '00000000-0000-0000-0000-000000000000') {
+        deleteMsg.textContent = `The ${project.title} project cannot be deleted!`;
+        projectView.appendChild(deleteMsg);
+    } else {
+        projectView.replaceChildren();
+        deleteMsg.textContent = `${project.title} deleted!`;
+    }
 
+    projectView.appendChild(deleteMsg);
 }

@@ -34,4 +34,7 @@ check if colors are light enough and usedark text when making own projects , for
 Better optimizination
 Whiel quicksort is quite efficient, there could be improvememnts made in how it is called and where.
 Also, when new items are added the entire lists are re-rendered rather than just adding on the new item 
+
+Better encapsulation and modularization. Being more selective of which data is shared between modules, using function calls to encapsulate better.
+render project still uses some title idnetification which may pose problems if two projects share the same title
 */

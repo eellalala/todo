@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { allTD, filterPast, filterFuture, filterWithin, findById, sortByDue} from './lists.js';
-export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, reRenderHome, renderProjectsSide, projectOptions, renderProjectView, unRenderProjectView };
+export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, reRenderHome, renderProjectsSide, projectOptions, renderProjectView, unRenderProjectView, removeProj};
 /* remember to separate the function calls with controls.js to avoid clutter later. this should only 
 be dom manipulation things only. event listeners are on controls.js */
 
@@ -192,10 +192,27 @@ function renderProjectView(project) {
 
     renderTDArr(projectView, project.tasks);
 
+    function makeBtn(type) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.classList.add(`${type}-project-btn`);
+        btn.id = `${type}-project-btn-${project.id}`;
+        btn.textContent = capitalizeFirst(type);
+
+        projectView.appendChild(btn);
+    }
+    
+    makeBtn('edit');
+    makeBtn('delete');
+
     document.getElementById('main').appendChild(projectView);
 }
 
 function unRenderProjectView() {
     reRenderHome();
     document.getElementById('project-view').remove();
+}
+
+function removeProj() {
+
 }

@@ -1,6 +1,6 @@
 import { isWithinInterval, startOfDay, addDays, isBefore, isSameDay } from 'date-fns';
 
-export { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, findIndexById, deleteTD, findProjByTitle};
+export { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, findIndexById, deleteItem, findProjByTitle};
 
 const allTD = [];
 
@@ -55,17 +55,17 @@ function sortByDue(tDArr) {
     return [...sortByDue(leftArr), p, ...sortByDue(rightArr)];
 }
 
-function findIndexById(id, tDArr) {
-    return tDArr.findIndex((td) => td.id === id);
+function findIndexById(id, arr) {
+    return arr.findIndex((item) => item.id === id);
 }
 
 function findById(id, tDArr) {
     return tDArr.find((td) => td.id === id);
 }
 
-function deleteTD(id, tDArr) {
-    const index = findIndexById(id, tDArr);
-    tDArr.splice(index, 1);
+function deleteItem(id, arr) {
+    const index = findIndexById(id, arr);
+    arr.splice(index, 1);
 }
 
 function updateAllLists(allTD) {
@@ -75,6 +75,7 @@ function updateAllLists(allTD) {
 function findProjByTitle(title, projArr) {
     return projArr.find((proj) => proj.title === title)
 }
+
 
 /* nice to have feature: call sortByPrio if byDue they're the same
 function sortByPrio(tDArr) {

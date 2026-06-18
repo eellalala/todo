@@ -1,6 +1,6 @@
-import { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteTD, findProjByTitle } from './lists.js';
+import { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteItem, findProjByTitle } from './lists.js';
 import { allProjects, Project } from './project.js';
-import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, reRenderHome, renderProjectView, unRenderProjectView } from './dom.js';
+import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, reRenderHome, renderProjectView, unRenderProjectView, removeProj } from './dom.js';
 import { ToDoItem } from './todo.js';
 
 const sidebar = document.getElementById('sidebar');
@@ -45,7 +45,7 @@ main.addEventListener('click', (event) => {
     const target = event.target;
     const id = target.id.slice(-36);
     if (target.classList.contains('delete-btn')) {
-        deleteTD(id, allTD);      
+        deleteItem(id, allTD);      
         removeTD(id);
     }
     if (target.classList.contains('check-btn')) {
@@ -141,6 +141,29 @@ sidebar.addEventListener('click', (event) => {
         } else {
             unRenderProjectView();
         }
+    }
+})
+
+/* Editing and delete project function: 
+Open edit screen and functionality like editing todo. 
+Functionality like deleting todo, but with one caveat. 
+Change "Home" Project name to "unsorted"
+
+Unsorted cannot be deleted or edited.
+If project.id is the original unsorted one, do not make buttons.
+
+*/
+main.addEventListener('click', (event) => {
+    const target = event.target;
+    const id = target.id.slice(-36);
+    if (target.classList.contains('delete-project-btn')) {
+        deleteItem(id, allProjects);      
+        removeProj(id);
+        console.log(allProjects);
+    }
+    if (target.classList.contains('edit-project-btn')) {
+        const editProjview = document.getElementById(`edit-project-view-${id}`); // implement render project edit view when rendering project
+        editProjView.classList.remove('hidden');
     }
 })
 

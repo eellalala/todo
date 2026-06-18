@@ -31,3 +31,5 @@ function removeTDProj(project, td) {
 
 // initialize unsorted default project
 const unsortedProj = new Project('Unsorted', '#8f9ca1', '00000000-0000-0000-0000-000000000000');
+const unsortedProj2 = new Project('test1', '#8f9ca1', );
+const unsortedProj3 = new Project('test2', '#8f9ca1', );

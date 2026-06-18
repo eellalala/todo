@@ -1,10 +1,16 @@
 import { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteItem, findProjByTitle } from './lists.js';
 import { allProjects, Project } from './project.js';
-import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, reRenderHome, renderProjectView, unRenderProjectView, deleteProjMsg } from './dom.js';
+import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, renderHome, renderProjectView, unRenderProjectView, deleteProjMsg } from './dom.js';
 import { ToDoItem } from './todo.js';
 
 const sidebar = document.getElementById('sidebar');
 const main = document.getElementById('main');
+
+const title = document.getElementById('title');
+title.addEventListener('click', () => {
+    unRenderProjectView();
+    renderHome();
+})
 
 const addProjectBtn = document.getElementById('add-project-btn');
 addProjectBtn.addEventListener('click', () => {
@@ -87,7 +93,12 @@ main.addEventListener('click', (event) => {
         }
         if (target.classList.contains('edit-todo-submit')) {
             td.editTD(newTitle.value, newDueDate.value, newPrio.value, newProject.value, newNote.value);
-            reRenderHome();
+            if (document.getElementById('lists-container')) {
+                renderHome();
+            } else {
+                unRenderProjectView();
+                renderProjectView(findProjByTitle(newProject.value, allProjects));
+            }
             clearEditView();
         }
     }
@@ -124,8 +135,12 @@ main.addEventListener('click', (event) => {
         titleInput.value = '';
         noteInput.value = '';
 
-        // rerendering the displayed page: depends on if user is on home screen or project screen. make into a function for repeated calls. 
-        reRenderHome();
+        if (document.getElementById('lists-container')) {
+            renderHome();
+        } else {
+            unRenderProjectView();
+            renderProjectView(findProjByTitle(projectInput.value, allProjects));
+        }
     }
 })
 
@@ -133,12 +148,8 @@ sidebar.addEventListener('click', (event) => {
     if (event.target.matches('.side-project-container span')) {
         const projectTitle = event.target.textContent;
         const project = findProjByTitle(projectTitle, allProjects);
-        if (!!document.getElementById('lists-container')) { //CHANGE TO DOES IT EXIST
-            renderProjectView(project); 
-        } else {
-            unRenderProjectView();
-            renderProjectView(project);
-        }
+        unRenderProjectView();
+        renderProjectView(project); 
     }
 })
 
@@ -198,8 +209,4 @@ click my todo to go back to home
 renderProjectsSide(allProjects);
 projectOptions(document.getElementById('todo-project-input'), allProjects);
 
-const upcomingTasks = document.getElementById('upcoming-tasks');
-renderTDArr(upcomingTasks, filterFuture(allTD));
-
-const overdueTasks = document.getElementById('overdue-tasks');
-renderTDArr(overdueTasks, filterPast(allTD));
+renderHome();

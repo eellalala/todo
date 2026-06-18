@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
 import { allTD, filterPast, filterFuture, filterWithin, findById, sortByDue} from './lists.js';
-export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, reRenderHome, renderProjectsSide, projectOptions, renderProjectView, unRenderProjectView, deleteProjMsg};
+export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, renderHome, renderProjectsSide, projectOptions, renderProjectView, unRenderProjectView, deleteProjMsg};
 /* remember to separate the function calls with controls.js to avoid clutter later. this should only 
 be dom manipulation things only. event listeners are on controls.js */
 
@@ -119,8 +119,8 @@ function removeTD(tDId) {
     tDContainer.remove();
 }
 
-function reRenderHome() {
-    if (document.getElementById('lists-container')) document.getElementById('lists-container').remove();
+function renderHome() {
+    document.getElementById('lists-container')?.remove();
 
     const listsContainer = document.createElement('div');
     listsContainer.id = 'lists-container';
@@ -180,7 +180,7 @@ function projectOptions(select, projectArr) {
 }
 
 function renderProjectView(project) {
-    document.getElementById('lists-container').remove();
+    document.getElementById('lists-container')?.remove();
 
     const id = project.id
 
@@ -226,8 +226,8 @@ function renderProjectView(project) {
 }
 
 function unRenderProjectView() {
-    reRenderHome();
-    document.getElementById('project-view').remove();
+    renderHome();
+    document.getElementById('project-view')?.remove();
 }
 
 function deleteProjMsg(id, allProjects) {

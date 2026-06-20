@@ -32,6 +32,7 @@ function renderTD(td, parent) {
 
         const checkBtn = tDContainer.querySelectorAll('button')[0];
         checkBtn.id = `check-btn-${td.id}`;
+        if (td.isDone) checkBtn.textContent = '✓';
 
         const tDEditView = tDContainer.querySelector('div');
         tDEditView.id = `edit-todo-view-${td.id}`;

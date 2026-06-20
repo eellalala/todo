@@ -1,5 +1,5 @@
-import { allTD, findProjByTitle } from './lists.js';
-import { addTDProj, removeTDProj, allProjects } from './project.js';
+import { allTD, allProjects, findProjByTitle } from './lists.js';
+import { addTDProj, removeTDProj } from './project.js';
 import { getLocalTDs, setLocalTDs } from './storage.js';
 export { addTodo, ToDoItem };
 
@@ -8,6 +8,7 @@ class ToDoItem {
         this.isDone = false;
         this.title = todo.title;
         this.dueDate = todo.dueDate;
+        this.isDone = todo.isDone ?? false;
         this.priority = todo.priority;
         this.projectTitle = todo.projectTitle;
         this.note = todo.note;
@@ -39,8 +40,8 @@ class ToDoItem {
     }
 }
 
-function addTodo({title, dueDate, priority, projectTitle, note, id}) {
-    const newTodo = new ToDoItem ({title, dueDate, priority, projectTitle, note, id});
+function addTodo({title, dueDate, isDone, priority, projectTitle, note, id}) {
+    const newTodo = new ToDoItem ({title, dueDate, isDone, priority, projectTitle, note, id});
     allTD.unshift(newTodo);
     
     setLocalTDs(allTD);

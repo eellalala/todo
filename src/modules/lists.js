@@ -1,9 +1,10 @@
 import { isWithinInterval, startOfDay, addDays, isBefore, isSameDay } from 'date-fns';
 import { setLocalTDs, getLocalTDs, getLocalProjects, setLocalProjects } from './storage.js';
 
-export { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, findIndexById, deleteItem, findProjByTitle};
+export { allTD, allProjects, filterPast, filterFuture, filterWithin, sortByDue, findById, findIndexById, deleteItem, findProjByTitle};
 
 const allTD = [];
+const allProjects = [];
 
 function filterPast(tDArr) {
     const filteredTDs = [];

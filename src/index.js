@@ -7,7 +7,7 @@ import './modules/lists.js';
 import { addProject } from './modules/project.js';
 import { addTodo } from './modules/todo.js'; // later, change maybe to initialize function in controls.js that determines inital run
 import { getLocalTDs, setLocalTDs, getLocalProjects, setLocalProjects } from './modules/storage.js';
-import { allTD } from "./modules/lists.js";
+import { allTD, allProjects } from "./modules/lists.js";
 
 /* 
 Sort by Urgency
@@ -64,6 +64,8 @@ function restoreProjects() {
 restoreProjects();
 restoreTDs();
 
+console.log(getLocalProjects().length);
+
 if (getLocalProjects().length == 0) { // check if they don't exist first 
     // initialize default projects and todos
     const unsortedProj = addProject({title: 'Unsorted', color: '#8f9ca1', id:'00000000-0000-0000-0000-000000000000'});
@@ -84,6 +86,9 @@ The problem is that functions are calling getLocalTDs, but that returns objects 
 Instead, they should be calling allTD and allTD is only saved to localstorage/taken from localstorage when necessary. 
 
 */
+
+console.log(allProjects);
+console.log(allTD);
 
 renderProjectsSide(getLocalProjects());
 projectOptions(document.getElementById('todo-project-input'), getLocalProjects());

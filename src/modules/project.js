@@ -1,8 +1,6 @@
-import { findById, findIndexById, sortByDue } from './lists.js';
+import { allProjects, findById, findIndexById, sortByDue } from './lists.js';
 import { getLocalProjects, setLocalProjects } from './storage.js';
-export { allProjects, Project, addTDProj, removeTDProj, addProject };
-
-const allProjects = [];
+export { Project, addTDProj, removeTDProj, addProject };
 
 class Project {
     constructor(project) {

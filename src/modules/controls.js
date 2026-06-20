@@ -1,5 +1,5 @@
-import { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteItem, findProjByTitle } from './lists.js';
-import { allProjects, Project, addProject } from './project.js';
+import { allTD, allProjects, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteItem, findProjByTitle } from './lists.js';
+import { Project, addProject } from './project.js';
 import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, renderHome, renderProjectView, unRenderProjectView, deleteProjMsg } from './dom.js';
 import { addTodo, ToDoItem } from './todo.js';
 import { setLocalTDs, getLocalTDs, getLocalProjects, setLocalProjects } from './storage.js';
@@ -38,7 +38,7 @@ sidebar.addEventListener('click', (event) => {
     }
     if (event.target.id == 'add-project-submit') { //project added
 
-        addProject(titleInput.value, colorInput.value);
+        addProject({title: titleInput.value, color: colorInput.value});
         addProjectView.classList.add('hidden');
 
         titleInput.value = '';

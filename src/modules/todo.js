@@ -1,24 +1,26 @@
 import { allTD, findProjByTitle } from './lists.js';
 import { addTDProj, removeTDProj, allProjects } from './project.js';
-export { ToDoItem };
+import { getTDs, setTDs } from './storage.js';
+export { addTodo };
 
 class ToDoItem {
     isDone = false;
 
-    constructor(title, dueDate, priority, projectTitle, note) {
-        this.title = title;
-        this.dueDate = dueDate;
-        this.priority = priority;
-        this.projectTitle = projectTitle;
-        this.note = note;
-        this.id = crypto.randomUUID();
+    constructor(todo) {
+        this.title = todo.title;
+        this.dueDate = todo.dueDate;
+        this.priority = todo.priority;
+        this.projectTitle = todo.projectTitle;
+        this.note = todo.note;
+        this.id = todo.id ?? crypto.randomUUID();
 
-        addTDProj(findProjByTitle(projectTitle, allProjects), this);
-        allTD.unshift(this);
+        addTDProj(findProjByTitle(todo.projectTitle, allProjects), this);
     }
 
     toggleDone(){
         this.isDone = !this.isDone;
+        
+        setTDs(allTD);
     }
     
     editTD(title, dueDate, priority, projectTitle, note) {
@@ -33,11 +35,16 @@ class ToDoItem {
         this.note = note;
 
         addTDProj(newProjectArr, this);
+
+        setTDs(allTD);
     }
 }
 
-// default Todos on app launch
-const testTD1 = new ToDoItem('Grocery shopping', new Date(2026, 5, 1), 'high', 'Unsorted', 'bring grocery bag');
-const testTD2 = new ToDoItem('Walk dog', new Date(2026, 5, 7), 'medium', 'Unsorted', '');
-const testTD3 = new ToDoItem('Clean bathroom', new Date(2026, 5, 13), 'low', 'Unsorted', 'scrub shower and toilet');
+function addTodo({title, dueDate, priority, projectTitle, note, id}) {
+    const newTodo = new ToDoItem ({title, dueDate, priority, projectTitle, note, id});
+    allTD.unshift(newTodo);
+    
+    setTDs(allTD);
 
+    return newTodo;
+}

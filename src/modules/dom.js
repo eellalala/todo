@@ -1,8 +1,7 @@
 import { format } from 'date-fns';
-import { allTD, filterPast, filterFuture, filterWithin, findById, sortByDue} from './lists.js';
+import { filterPast, filterFuture, filterWithin, findById, sortByDue} from './lists.js';
+import { setTDs, getTDs, getProjects, setProjects } from './storage.js';
 export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, renderHome, renderProjectsSide, projectOptions, renderProjectView, unRenderProjectView, deleteProjMsg};
-/* remember to separate the function calls with controls.js to avoid clutter later. this should only 
-be dom manipulation things only. event listeners are on controls.js */
 
 function capitalizeFirst(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -69,7 +68,7 @@ function expandTD(tDId) {
     const tDContainer = document.getElementById(`todo-container-${tDId}`);
     tDContainer.classList.add('expanded-todo');
 
-    const td = findById(tDId, allTD);
+    const td = findById(tDId, getTDs());
 
     const tDInfo = document.createElement('div');
     tDInfo.classList.add('td-info');
@@ -103,7 +102,7 @@ function collapseTD(tDId) {
     const tDContainer = document.getElementById(`todo-container-${tDId}`);
     tDContainer.classList.remove('expanded-todo'); 
 
-    const td = findById(tDId, allTD);
+    const td = findById(tDId, getTDs());
 
     const tDInfo = tDContainer.querySelector('div');
     tDInfo.remove();
@@ -139,8 +138,8 @@ function renderHome() {
         listsContainer.appendChild(tDContainer);
     }
 
-    makeTDContainer('upcoming', filterFuture(allTD));
-    makeTDContainer('overdue', filterPast(allTD));
+    makeTDContainer('upcoming', filterFuture(getTDs()));
+    makeTDContainer('overdue', filterPast(getTDs()));
 
     document.getElementById('main').appendChild(listsContainer);
 }

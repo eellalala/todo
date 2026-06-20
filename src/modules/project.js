@@ -1,35 +1,43 @@
 import { findById, findIndexById, sortByDue } from './lists.js';
-export { allProjects, Project, addTDProj, removeTDProj };
+import { getProjects, setProjects } from './storage.js';
+export { allProjects, Project, addTDProj, removeTDProj, addProject };
 
-const allProjects = []; // projects are stored as array of array .
+const allProjects = [];
 
 class Project {
-    tasks = [];
-
-    constructor(title, color, id) {
-        this.title = title;
-        this.color = color; //based on what's filled in the form when the user clicks submit
-        id == undefined ? this.id = crypto.randomUUID() : this.id = id;
-
-        allProjects.push(this);
+    constructor(project) {
+        this.title = project.title;
+        this.color = project.color; //based on what's filled in the form when the user clicks submit
+        this.id = project.id ?? crypto.randomUUID();
+        this.tasks = project.tasks ?? [];
     }
 
     editProj(title, color) {
         this.title = title;
         this.color = color;
+
+        setProjects(allProjects);
     }
 }
 
 function addTDProj(project, td) {
     project.tasks.push(td);
     sortByDue(project.tasks);
+
+    setProjects(allProjects);
 }
 
 function removeTDProj(project, td) {
     project.tasks.splice(findIndexById(td.id, project.tasks), 1);
+
+    setProjects(allProjects);
 }
 
-// initialize unsorted default project
-const unsortedProj = new Project('Unsorted', '#8f9ca1', '00000000-0000-0000-0000-000000000000');
-const unsortedProj2 = new Project('test1', '#8f9ca1', );
-const unsortedProj3 = new Project('test2', '#8f9ca1', );
+function addProject({title, color, id, tasks}) {
+    const newProject = new Project ({title, color, id, tasks});
+    allProjects.push(newProject);
+    
+    setProjects(allProjects);
+
+    return newProject;
+}

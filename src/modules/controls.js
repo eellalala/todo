@@ -1,7 +1,8 @@
-import { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteItem, findProjByTitle } from './lists.js';
-import { allProjects, Project } from './project.js';
+import { filterPast, filterFuture, filterWithin, sortByDue, findById, deleteItem, findProjByTitle } from './lists.js';
+import { allProjects, Project, addProject } from './project.js';
 import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, renderHome, renderProjectView, unRenderProjectView, deleteProjMsg } from './dom.js';
-import { ToDoItem } from './todo.js';
+import { addTodo } from './todo.js';
+import { setTDs, getTDs, getProjects, setProjects } from './storage.js';
 
 const sidebar = document.getElementById('sidebar');
 const main = document.getElementById('main');
@@ -36,7 +37,8 @@ sidebar.addEventListener('click', (event) => {
         colorInput.value = '#000000';
     }
     if (event.target.id == 'add-project-submit') {
-        new Project (titleInput.value, colorInput.value);
+
+        addProject(titleInput.value, colorInput.value);
         addProjectView.classList.add('hidden');
 
         titleInput.value = '';
@@ -51,11 +53,11 @@ main.addEventListener('click', (event) => {
     const target = event.target;
     const id = target.id.slice(-36);
     if (target.classList.contains('delete-btn')) {
-        deleteItem(id, allTD);      
+        deleteItem(id, getTDs());    
         removeTD(id);
     }
     if (target.classList.contains('check-btn')) {
-        const td = findById(id, allTD);
+        const td = findById(id, getTDs());
         td.isDone ? uncheckTD(id) : checkTD(id);
         td.toggleDone();
     }
@@ -72,7 +74,7 @@ main.addEventListener('click', (event) => {
 
     if (target.classList.contains('edit-todo-back') || target.classList.contains('edit-todo-submit')) {
         const id = target.id.slice(-36);
-        const td = findById(id, allTD);
+        const td = findById(id, getTDs());
     
         const editTDView = document.getElementById(`edit-todo-view-${id}`);
 
@@ -129,7 +131,7 @@ main.addEventListener('click', (event) => {
         noteInput.value = '';
     }
     if (event.target.id == 'add-todo-submit') {
-        new ToDoItem (titleInput.value, duedateInput.value, priorityInput.value, projectInput.value, noteInput.value);
+        addTodo({title: titleInput.value, dueDate: duedateInput.value, priority: priorityInput.value, project: projectInput.value, note: noteInput.value});
         addTDView.classList.add('hidden');
 
         titleInput.value = '';
@@ -199,14 +201,3 @@ main.addEventListener('click', (event) => {
         }
     }
 })
-
-/*
-currently, to switch between projects, it renders ome page first instead of cleanrly swithching
-click my todo to go back to home 
-*/
-
-// initial functions to run when opens 
-renderProjectsSide(allProjects);
-projectOptions(document.getElementById('todo-project-input'), allProjects);
-
-renderHome();

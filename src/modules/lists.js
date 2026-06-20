@@ -1,4 +1,6 @@
 import { isWithinInterval, startOfDay, addDays, isBefore, isSameDay } from 'date-fns';
+import { setTDs, getTDs, getProjects, setProjects } from './storage.js';
+
 
 export { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, findIndexById, deleteItem, findProjByTitle};
 
@@ -66,6 +68,7 @@ function findById(id, arr) {
 function deleteItem(id, arr) {
     const index = findIndexById(id, arr);
     arr.splice(index, 1);
+    setTDs(arr);
 }
 
 function updateAllLists(allTD) {
@@ -75,10 +78,3 @@ function updateAllLists(allTD) {
 function findProjByTitle(title, projArr) {
     return projArr.find((proj) => proj.title === title)
 }
-
-
-/* nice to have feature: call sortByPrio if byDue they're the same
-function sortByPrio(tDArr) {
-
-}
-*/

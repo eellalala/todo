@@ -1,18 +1,18 @@
-export { getTDs, setTDs, getProjects, setProjects };
+export { getLocalTDs, setLocalTDs, getLocalProjects, setLocalProjects };
 
-function getTDs() {
+function getLocalTDs() {
     const data = localStorage.getItem('todos');
     return data ? JSON.parse(data) : [];
 }
 
-function setTDs(arr) {
+function setLocalTDs(arr) {
     localStorage.setItem('todos', JSON.stringify(arr));
 }
 
-function getProjects() {
+function getLocalProjects() {
     const data = localStorage.getItem('projects');
     return data ? JSON.parse(data) : [];}
 
-function setProjects(arr) {
+function setLocalProjects(arr) {
     localStorage.setItem('projects', JSON.stringify(arr));
 }

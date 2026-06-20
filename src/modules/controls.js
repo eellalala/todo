@@ -1,8 +1,8 @@
-import { filterPast, filterFuture, filterWithin, sortByDue, findById, deleteItem, findProjByTitle } from './lists.js';
+import { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteItem, findProjByTitle } from './lists.js';
 import { allProjects, Project, addProject } from './project.js';
 import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, renderHome, renderProjectView, unRenderProjectView, deleteProjMsg } from './dom.js';
-import { addTodo } from './todo.js';
-import { setTDs, getTDs, getProjects, setProjects } from './storage.js';
+import { addTodo, ToDoItem } from './todo.js';
+import { setLocalTDs, getLocalTDs, getLocalProjects, setLocalProjects } from './storage.js';
 
 const sidebar = document.getElementById('sidebar');
 const main = document.getElementById('main');
@@ -36,7 +36,7 @@ sidebar.addEventListener('click', (event) => {
         titleInput.value = '';
         colorInput.value = '#000000';
     }
-    if (event.target.id == 'add-project-submit') {
+    if (event.target.id == 'add-project-submit') { //project added
 
         addProject(titleInput.value, colorInput.value);
         addProjectView.classList.add('hidden');
@@ -46,22 +46,30 @@ sidebar.addEventListener('click', (event) => {
 
         renderProjectsSide(allProjects);
         projectOptions(document.getElementById('todo-project-input'), allProjects);
+
+        setLocalProjects(allProjects);
     }
 })
 
-main.addEventListener('click', (event) => {
+main.addEventListener('click', (event) => { 
     const target = event.target;
     const id = target.id.slice(-36);
-    if (target.classList.contains('delete-btn')) {
-        deleteItem(id, getTDs());    
+    if (target.classList.contains('delete-btn')) { // delete 
+        deleteItem(id, allTD);    
         removeTD(id);
+
+        setLocalTDs(allTD);
     }
-    if (target.classList.contains('check-btn')) {
-        const td = findById(id, getTDs());
+    if (target.classList.contains('check-btn')) { // check
+        const td = findById(id, allTD);
         td.isDone ? uncheckTD(id) : checkTD(id);
+        console.log(td);
+        console.log(td instanceof ToDoItem);
         td.toggleDone();
+
+        setLocalTDs(allTD);
     }
-    if (target.classList.contains('edit-btn')) {
+    if (target.classList.contains('edit-btn')) { // opens edit
         const editTDView = document.getElementById(`edit-todo-view-${id}`);
         projectOptions(document.getElementById(`todo-project-edit-${id}`), allProjects);
         editTDView.classList.remove('hidden');
@@ -74,7 +82,7 @@ main.addEventListener('click', (event) => {
 
     if (target.classList.contains('edit-todo-back') || target.classList.contains('edit-todo-submit')) {
         const id = target.id.slice(-36);
-        const td = findById(id, getTDs());
+        const td = findById(id, allTD);
     
         const editTDView = document.getElementById(`edit-todo-view-${id}`);
 
@@ -93,7 +101,7 @@ main.addEventListener('click', (event) => {
         if (target.classList.contains('edit-todo-back')) {
             clearEditView();
         }
-        if (target.classList.contains('edit-todo-submit')) {
+        if (target.classList.contains('edit-todo-submit')) { // edit confirmed
             td.editTD(newTitle.value, newDueDate.value, newPrio.value, newProject.value, newNote.value);
             if (document.getElementById('lists-container')) {
                 renderHome();
@@ -102,6 +110,7 @@ main.addEventListener('click', (event) => {
                 renderProjectView(findProjByTitle(newProject.value, allProjects));
             }
             clearEditView();
+            setLocalTDs(allTD);
         }
     }
 })
@@ -130,7 +139,7 @@ main.addEventListener('click', (event) => {
         titleInput.value = '';
         noteInput.value = '';
     }
-    if (event.target.id == 'add-todo-submit') {
+    if (event.target.id == 'add-todo-submit') { //todo added
         addTodo({title: titleInput.value, dueDate: duedateInput.value, priority: priorityInput.value, project: projectInput.value, note: noteInput.value});
         addTDView.classList.add('hidden');
 
@@ -143,6 +152,7 @@ main.addEventListener('click', (event) => {
             unRenderProjectView();
             renderProjectView(findProjByTitle(projectInput.value, allProjects));
         }
+        setLocalTDs(allTD);
     }
 })
 
@@ -163,6 +173,7 @@ main.addEventListener('click', (event) => {
         deleteProjMsg(id, allProjects);
         deleteItem(id, allProjects);
         renderProjectsSide(allProjects);
+        setLocalProjects(allProjects);
     }
     if (target.classList.contains('edit-project-btn')) {
         const editProjView = document.getElementById(`edit-project-view-${id}`); // implement render project edit view when rendering project
@@ -198,6 +209,7 @@ main.addEventListener('click', (event) => {
             unRenderProjectView();
             renderProjectView(project);
             clearEditView();
+            setLocalProjects(allProjects);
         }
     }
 })

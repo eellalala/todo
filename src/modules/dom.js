@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
-import { filterPast, filterFuture, filterWithin, findById, sortByDue} from './lists.js';
-import { setTDs, getTDs, getProjects, setProjects } from './storage.js';
+import { allTD, filterPast, filterFuture, filterWithin, findById, sortByDue} from './lists.js';
+import { setLocalTDs, getLocalTDs, getLocalProjects, setLocalProjects } from './storage.js';
 export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, renderHome, renderProjectsSide, projectOptions, renderProjectView, unRenderProjectView, deleteProjMsg};
 
 function capitalizeFirst(str) {
@@ -68,7 +68,7 @@ function expandTD(tDId) {
     const tDContainer = document.getElementById(`todo-container-${tDId}`);
     tDContainer.classList.add('expanded-todo');
 
-    const td = findById(tDId, getTDs());
+    const td = findById(tDId, allTD);
 
     const tDInfo = document.createElement('div');
     tDInfo.classList.add('td-info');
@@ -102,7 +102,7 @@ function collapseTD(tDId) {
     const tDContainer = document.getElementById(`todo-container-${tDId}`);
     tDContainer.classList.remove('expanded-todo'); 
 
-    const td = findById(tDId, getTDs());
+    const td = findById(tDId, allTD);
 
     const tDInfo = tDContainer.querySelector('div');
     tDInfo.remove();
@@ -138,8 +138,8 @@ function renderHome() {
         listsContainer.appendChild(tDContainer);
     }
 
-    makeTDContainer('upcoming', filterFuture(getTDs()));
-    makeTDContainer('overdue', filterPast(getTDs()));
+    makeTDContainer('upcoming', filterFuture(allTD));
+    makeTDContainer('overdue', filterPast(allTD));
 
     document.getElementById('main').appendChild(listsContainer);
 }

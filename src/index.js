@@ -6,7 +6,8 @@ import { renderProjectsSide, projectOptions, renderHome } from './modules/dom.js
 import './modules/lists.js';
 import { addProject } from './modules/project.js';
 import { addTodo } from './modules/todo.js'; // later, change maybe to initialize function in controls.js that determines inital run
-import { getTDs, setTDs, getProjects, setProjects } from './modules/storage.js';
+import { getLocalTDs, setLocalTDs, getLocalProjects, setLocalProjects } from './modules/storage.js';
+import { allTD } from "./modules/lists.js";
 
 /* 
 Sort by Urgency
@@ -43,7 +44,7 @@ function sortByPrio(tDArr) {
 // run on startup
 
 function restoreTDs() {
-    const storedTDs = getTDs();
+    const storedTDs = getLocalTDs();
     storedTDs.forEach(todo => {
         todo.dueDate = new Date(todo.dueDate);
         addTodo(todo);
@@ -51,7 +52,7 @@ function restoreTDs() {
 }
 
 function restoreProjects() {
-    const storedProjects = getProjects();
+    const storedProjects = getLocalProjects();
     storedProjects.forEach(project => {
         addProject(project);
     })
@@ -63,17 +64,28 @@ function restoreProjects() {
 restoreProjects();
 restoreTDs();
 
-if (getProjects().length == 0) { // check if they don't exist first 
+if (getLocalProjects().length == 0) { // check if they don't exist first 
     // initialize default projects and todos
     const unsortedProj = addProject({title: 'Unsorted', color: '#8f9ca1', id:'00000000-0000-0000-0000-000000000000'});
     const myProject = addProject({title: 'My Project', color: '#8f9ca1'});
 
+    console.log(allTD);
+
     const testTD1 = addTodo({title: 'Grocery shopping', dueDate: new Date(2026, 5, 1), priority: 'high', projectTitle: 'Unsorted', note: 'bring grocery bag'});
+    console.log(testTD1); // confirmed these are ToDos!
     const testTD2 = addTodo({title: 'Walk dog', dueDate: new Date(2026, 5, 7), priority: 'medium', projectTitle: 'Unsorted', note: ''});
     const testTD3 = addTodo({title: 'Clean bathroom', dueDate: new Date(2026, 5, 13), priority: 'low', projectTitle: 'Unsorted', note: 'scrub shower and toilet'});
+    console.log(allTD);
+    console.log(getLocalTDs());
 }
 
-renderProjectsSide(getProjects());
-projectOptions(document.getElementById('todo-project-input'), getProjects());
+/* 
+The problem is that functions are calling getLocalTDs, but that returns objects instead of Todo items (which have b een restored into allTD)
+Instead, they should be calling allTD and allTD is only saved to localstorage/taken from localstorage when necessary. 
+
+*/
+
+renderProjectsSide(getLocalProjects());
+projectOptions(document.getElementById('todo-project-input'), getLocalProjects());
 
 renderHome();

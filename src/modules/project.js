@@ -1,5 +1,5 @@
 import { findById, findIndexById, sortByDue } from './lists.js';
-import { getProjects, setProjects } from './storage.js';
+import { getLocalProjects, setLocalProjects } from './storage.js';
 export { allProjects, Project, addTDProj, removeTDProj, addProject };
 
 const allProjects = [];
@@ -16,7 +16,7 @@ class Project {
         this.title = title;
         this.color = color;
 
-        setProjects(allProjects);
+        setLocalProjects(allProjects);
     }
 }
 
@@ -24,20 +24,20 @@ function addTDProj(project, td) {
     project.tasks.push(td);
     sortByDue(project.tasks);
 
-    setProjects(allProjects);
+    setLocalProjects(allProjects);
 }
 
 function removeTDProj(project, td) {
     project.tasks.splice(findIndexById(td.id, project.tasks), 1);
 
-    setProjects(allProjects);
+    setLocalProjects(allProjects);
 }
 
 function addProject({title, color, id, tasks}) {
     const newProject = new Project ({title, color, id, tasks});
     allProjects.push(newProject);
     
-    setProjects(allProjects);
+    setLocalProjects(allProjects);
 
     return newProject;
 }

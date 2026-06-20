@@ -1,6 +1,5 @@
 import { isWithinInterval, startOfDay, addDays, isBefore, isSameDay } from 'date-fns';
-import { setTDs, getTDs, getProjects, setProjects } from './storage.js';
-
+import { setLocalTDs, getLocalTDs, getLocalProjects, setLocalProjects } from './storage.js';
 
 export { allTD, filterPast, filterFuture, filterWithin, sortByDue, findById, findIndexById, deleteItem, findProjByTitle};
 
@@ -68,7 +67,7 @@ function findById(id, arr) {
 function deleteItem(id, arr) {
     const index = findIndexById(id, arr);
     arr.splice(index, 1);
-    setTDs(arr);
+    setLocalTDs(arr);
 }
 
 function updateAllLists(allTD) {

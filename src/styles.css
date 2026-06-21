@@ -172,7 +172,7 @@ form > *:not(button) {
     margin: 3%;
 }
 
-form > button, .todo-container > button:not(.check-btn) {
+button, .todo-container > button:not(.check-btn, .add-btn) {
     all: unset;
     background-color: var(--secondary-color);
     border: 2px solid var(--tertiary-color);

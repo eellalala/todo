@@ -1,8 +1,8 @@
-import { allTD, allProjects, filterPast, filterFuture, filterWithin, sortByDue, findById, deleteItem, findProjByTitle } from './lists.js';
-import { Project, addProject } from './project.js';
-import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, editTD, finishEditTD, renderProjectsSide, projectOptions, renderHome, renderProjectView, unRenderProjectView, deleteProjMsg } from './dom.js';
+import { allTD, allProjects, findById, deleteItem, findProjByTitle } from './lists.js';
+import { addProject } from './project.js';
+import { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, renderProjectsSide, projectOptions, renderHome, renderProjectView, unRenderProjectView, deleteProjMsg } from './dom.js';
 import { addTodo, ToDoItem } from './todo.js';
-import { setLocalTDs, getLocalTDs, getLocalProjects, setLocalProjects } from './storage.js';
+import { setLocalTDs, setLocalProjects } from './storage.js';
 
 const sidebar = document.getElementById('sidebar');
 const main = document.getElementById('main');

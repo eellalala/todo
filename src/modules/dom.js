@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
-import { allTD, filterPast, filterFuture, filterWithin, findById, sortByDue} from './lists.js';
-import { setLocalTDs, getLocalTDs, getLocalProjects, setLocalProjects } from './storage.js';
+import { allTD, filterPast, filterFuture, filterWithin, findById } from './lists.js';
+import { setLocalTDs } from './storage.js';
 export { renderTDArr, checkTD, uncheckTD, expandTD, collapseTD, removeTD, renderHome, renderProjectsSide, projectOptions, renderProjectView, unRenderProjectView, deleteProjMsg};
 
 function capitalizeFirst(str) {

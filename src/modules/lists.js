@@ -71,10 +71,6 @@ function deleteItem(id, arr) {
     setLocalTDs(arr);
 }
 
-function updateAllLists(allTD) {
-    // maybe needed? updates all lists at once when allTD changes
-}
-
 function findProjByTitle(title, projArr) {
     return projArr.find((proj) => proj.title === title)
 }

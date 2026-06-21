@@ -3,11 +3,10 @@ import { format, isBefore } from 'date-fns'; //import other functions from data-
 
 import './modules/controls.js';
 import { renderProjectsSide, projectOptions, renderHome } from './modules/dom.js';
-import './modules/lists.js';
-import { addProject } from './modules/project.js';
-import { addTodo } from './modules/todo.js'; // later, change maybe to initialize function in controls.js that determines inital run
+import { Project, addProject } from './modules/project.js';
+import { ToDoItem, addTodo } from './modules/todo.js'; // later, change maybe to initialize function in controls.js that determines inital run
 import { getLocalTDs, setLocalTDs, getLocalProjects, setLocalProjects } from './modules/storage.js';
-import { allTD, allProjects } from "./modules/lists.js";
+import { allTD, allProjects, findById } from "./modules/lists.js";
 
 /* 
 Sort by Urgency
@@ -43,54 +42,70 @@ function sortByPrio(tDArr) {
 
 // run on startup
 
-function restoreTDs() {
-    const storedTDs = getLocalTDs();
+
+function restore(storedProjects, storedTDs) {
+    // Restore projects first with empty tasks
+    storedProjects.forEach(project => {
+        addProject({ title: project.title, color: project.color, id: project.id, tasks: [] });
+    });
+
+    // Then restore todos — the ToDoItem constructor will attach them to the correct project
     storedTDs.forEach(todo => {
         todo.dueDate = new Date(todo.dueDate);
         addTodo(todo);
-    })
-}
-
-function restoreProjects() {
-    const storedProjects = getLocalProjects();
-    storedProjects.forEach(project => {
-        addProject(project);
-    })
+    });
 }
 
 // on launch
 
 // initialize defaults project -- check that they dont exist first
-restoreProjects();
-restoreTDs();
+console.log(getLocalProjects());
+restore(getLocalProjects(), getLocalTDs());
+//restoreTDs(getLocalTDs());
 
-console.log(getLocalProjects().length);
+/*
+function restoreTDinProj(project) {
+    const tasks = project.tasks;
+    const restoredTasks = [];
+    restoreTDs(tasks);
+    tasks.forEach(task => {
+        if (!findById(task.id, restoredTasks)) {
+            restoredTasks.push(task);
+        }
+    })
+    project.tasks = restoredTasks;
+}
 
+allProjects.forEach(project => {
+    restoreTDinProj(project);
+})
+*/
 if (getLocalProjects().length == 0) { // check if they don't exist first 
     // initialize default projects and todos
     const unsortedProj = addProject({title: 'Unsorted', color: '#8f9ca1', id:'00000000-0000-0000-0000-000000000000'});
     const myProject = addProject({title: 'My Project', color: '#8f9ca1'});
 
-    console.log(allTD);
-
     const testTD1 = addTodo({title: 'Grocery shopping', dueDate: new Date(2026, 5, 1), priority: 'high', projectTitle: 'Unsorted', note: 'bring grocery bag'});
-    console.log(testTD1); // confirmed these are ToDos!
     const testTD2 = addTodo({title: 'Walk dog', dueDate: new Date(2026, 5, 7), priority: 'medium', projectTitle: 'Unsorted', note: ''});
     const testTD3 = addTodo({title: 'Clean bathroom', dueDate: new Date(2026, 5, 13), priority: 'low', projectTitle: 'Unsorted', note: 'scrub shower and toilet'});
-    console.log(allTD);
-    console.log(getLocalTDs());
 }
-
-/* 
-The problem is that functions are calling getLocalTDs, but that returns objects instead of Todo items (which have b een restored into allTD)
-Instead, they should be calling allTD and allTD is only saved to localstorage/taken from localstorage when necessary. 
-
-*/
-
-console.log(allProjects);
-console.log(allTD);
 
 renderProjectsSide(getLocalProjects());
 projectOptions(document.getElementById('todo-project-input'), getLocalProjects());
 
 renderHome();
+
+document.getElementById('test-btn').addEventListener('click', ()=> {
+    console.log(allProjects);
+    console.log(allTD);
+    allProjects.forEach(project => {
+        console.log(project.tasks);
+    })
+})
+
+/* 
+while all projects is being updated fine, the new Todos are being saved to the projects in allprojects and all that data is being kept. 
+so many duplicate todos get added, and those aren't even being stored as Todos arather as generic objects. 
+Ever time it refreshes it duplicates all the items , what happens every refresh? restore does. so restore must be duplicating things.
+
+*/

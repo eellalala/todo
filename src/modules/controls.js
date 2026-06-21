@@ -140,7 +140,7 @@ main.addEventListener('click', (event) => {
         noteInput.value = '';
     }
     if (event.target.id == 'add-todo-submit') { //todo added
-        addTodo({title: titleInput.value, dueDate: duedateInput.value, priority: priorityInput.value, project: projectInput.value, note: noteInput.value});
+        addTodo({title: titleInput.value, dueDate: duedateInput.value, priority: priorityInput.value, projectTitle: projectInput.value, note: noteInput.value});
         addTDView.classList.add('hidden');
 
         titleInput.value = '';

@@ -5,6 +5,7 @@ To-do list web app
 - Home page shows all tasks, sorted into **overdue** and **upcoming**
 - Click todos to view extended information, edit or delete
 - Todos sorted by due date
+- Project view to categorize your todos
 - Add your own todos and projects, all saved in local storage
 
 ## 💻 Technologies

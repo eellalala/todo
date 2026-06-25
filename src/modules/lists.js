@@ -4,10 +4,8 @@ import {
   addDays,
   isBefore,
   isSameDay,
-} from "date-fns";
-import {
-  setLocalTDs,
-} from "./storage.js";
+} from 'date-fns';
+import { setLocalTDs } from './storage.js';
 
 export {
   allTD,

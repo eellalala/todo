@@ -1,5 +1,5 @@
-import { allProjects, findById, findIndexById, sortByDue } from "./lists.js";
-import { getLocalProjects, setLocalProjects } from "./storage.js";
+import { allProjects, findIndexById, sortByDue } from './lists.js';
+import { setLocalProjects } from './storage.js';
 export { Project, addTDProj, removeTDProj, addProject };
 
 class Project {

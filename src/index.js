@@ -1,13 +1,13 @@
-import "./styles.css";
-import "./modules/controls.js";
+import './styles.css';
+import './modules/controls.js';
 import {
   renderProjectsSide,
   projectOptions,
   renderHome,
-} from "./modules/dom.js";
-import { addProject } from "./modules/project.js";
-import { addTodo } from "./modules/todo.js";
-import { getLocalTDs, getLocalProjects } from "./modules/storage.js";
+} from './modules/dom.js';
+import { addProject } from './modules/project.js';
+import { addTodo } from './modules/todo.js';
+import { getLocalTDs, getLocalProjects } from './modules/storage.js';
 
 function restore(storedProjects, storedTDs) {
   storedProjects.forEach((project) => {
@@ -33,38 +33,38 @@ if (getLocalProjects().length == 0) {
   // check if they don't exist yet
   // initialize default projects and todos
   addProject({
-    title: "Unsorted",
-    color: "#8f9ca1",
-    id: "00000000-0000-0000-0000-000000000000",
+    title: 'Unsorted',
+    color: '#8f9ca1',
+    id: '00000000-0000-0000-0000-000000000000',
   });
-  addProject({ title: "My Project", color: "#8f9ca1" });
+  addProject({ title: 'My Project', color: '#8f9ca1' });
 
   addTodo({
-    title: "Grocery shopping",
+    title: 'Grocery shopping',
     dueDate: new Date(2026, 5, 1),
-    priority: "high",
-    projectTitle: "Unsorted",
-    note: "bring grocery bag",
+    priority: 'high',
+    projectTitle: 'Unsorted',
+    note: 'bring grocery bag',
   });
   addTodo({
-    title: "Walk dog",
+    title: 'Walk dog',
     dueDate: new Date(2026, 5, 7),
-    priority: "medium",
-    projectTitle: "Unsorted",
-    note: "",
+    priority: 'medium',
+    projectTitle: 'Unsorted',
+    note: '',
   });
   addTodo({
-    title: "Clean bathroom",
+    title: 'Clean bathroom',
     dueDate: new Date(2026, 5, 13),
-    priority: "low",
-    projectTitle: "Unsorted",
-    note: "scrub shower and toilet",
+    priority: 'low',
+    projectTitle: 'Unsorted',
+    note: 'scrub shower and toilet',
   });
 }
 
 renderProjectsSide(getLocalProjects());
 projectOptions(
-  document.getElementById("todo-project-input"),
+  document.getElementById('todo-project-input'),
   getLocalProjects(),
 );
 

@@ -1,6 +1,6 @@
-import { allTD, allProjects, findProjByTitle } from "./lists.js";
-import { addTDProj, removeTDProj } from "./project.js";
-import { getLocalTDs, setLocalTDs } from "./storage.js";
+import { allTD, allProjects, findProjByTitle } from './lists.js';
+import { addTDProj, removeTDProj } from './project.js';
+import { getLocalTDs, setLocalTDs } from './storage.js';
 export { addTodo, ToDoItem };
 
 class ToDoItem {

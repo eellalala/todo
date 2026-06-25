@@ -1,7 +1,7 @@
 // webpack.common.js
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import HtmlWebpackPlugin from "html-webpack-plugin";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,7 +10,7 @@ export default {
   entry: "./src/index.js",
   output: {
     filename: "main.js",
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, "dist"),
     clean: true,
   },
   devtool: "eval-source-map",

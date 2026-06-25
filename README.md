@@ -2,7 +2,11 @@
 To-do list web app 
 
 ## ⭐️ Features
-- 
+- Home page shows all tasks, sorted into **overdue** and **upcoming**
+- Click todos to view extended information, edit or delete
+- Todos sorted by due date
+- Project view to categorize your todos
+- Add your own todos and projects, all saved in local storage
 
 ## 💻 Technologies
 - `HTML`
@@ -10,43 +14,18 @@ To-do list web app
 - `JavaScript`
 
 ## 💫 Process
+I started by separating functionality into modules, and ideating features and functions. Then, I would tackle one feature at a time (sorting lists, rendering, deleting todos, editing todos, adding projects, etc.). Styling was progressive through the development process, to help me visualize how it was coming along.
 
 ## 📲 Preview
-![Preview Image 1](/preview/1.png)
-![Preview Image 2](/preview/2.png)
+<img width="1177" height="783" alt="Image" src="https://github.com/user-attachments/assets/c7602f9a-7f93-485b-bca0-2109c6e09560" />
+<img width="1258" height="866" alt="Image" src="https://github.com/user-attachments/assets/6f874307-db72-4a43-b01c-5dc5a99f2d2e" />
 
-## 💭 Future
+## 🐈 Learning Outcomes
+This project really emphasized the importance of having clean, well-named, separate functions. There were times where I thought including other things would save time, but only created more bugs in the future because I lost track of what functions really did. While I tried my best to organize data and modules cleanly, in hindsight there were things I could have done better that would have made code more maintainable. In the future, I will try to have a single source of truth as much as possible. Getting the array of all todos and the todos under each project to sync at the end was a huge headache.
 
-/* 
-Sort by Urgency
-
-Make todo renderings better: 
-have an icon that color's changes according to project. 
-
-Change Add project and todo buttons type to submit instead of button (after localstorage itll persist after refresh)
-potentially add another default color for the projects, otherwise remain as balck.  (see html and controls.js)
-
-MAKE TITLE AND DATE FOR TODO MANDANTORY 
-set predetermined date to today 
-
-Future: Mobile compatibility
-
-use proejct id more, currently proejct relies on title which can pose problems if two proj have ths ame title
-
-check if colors are light enough and usedark text when making own projects , for better robustness and accessibility
-
-Better optimizination
-Whiel quicksort is quite efficient, there could be improvememnts made in how it is called and where.
-Also, when new items are added the entire lists are re-rendered rather than just adding on the new item 
-
-Better encapsulation and modularization. Being more selective of which data is shared between modules, using function calls to encapsulate better.
-render project still uses some title idnetification which may pose problems if two projects share the same title
-*/
-
-/* nice to have feature: call sortByPrio if byDue they're the same
-function sortByPrio(tDArr) {
-
-}
-
-pre-populate edit screen with previous values for smoother editing.
-*/
+## 💭 Future Improvements 
+- Todos are already sorted by due date, implement sort by priority within due date
+- On editing screen, pre-fill values with previous values, validate title and due date inputs (for convenience and preventing unexpected behaviour)
+- Use ids for identification across entire app, project relies on title for some functions (posing problems if two projects have same title)
+- Media queries for mobile compability
+- Detect color inputs and adjust styling, as project text in sidebar is white, which may be problematic if user chooses a light color

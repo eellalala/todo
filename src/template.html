@@ -1,116 +1,132 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do Manager</title>
-</head>
-<body>
+  </head>
+  <body>
     <div id="sidebar">
-        <div id="side-heading">
-            <h2 id="sidebar-head">My Projects</h2>
-            <button type="button" class="add-btn" id="add-project-btn">+</button>
-        </div>
-        <section id="add-project-view" class="hidden">
-            <h3>Add Project</h3>
-            <form>
-                <label for="project-title-input">Project Title:</label>
-                <input type="text" name="project-title" id="project-title-input">
+      <div id="side-heading">
+        <h2 id="sidebar-head">My Projects</h2>
+        <button type="button" class="add-btn" id="add-project-btn">+</button>
+      </div>
+      <section id="add-project-view" class="hidden">
+        <h3>Add Project</h3>
+        <form>
+          <label for="project-title-input">Project Title:</label>
+          <input type="text" name="project-title" id="project-title-input" />
 
-                <label for="project-color-input">Project Color:</label>
-                <input type="color" name="project-color" id="project-color-input" colorspace="display-p3">
+          <label for="project-color-input">Project Color:</label>
+          <input
+            type="color"
+            name="project-color"
+            id="project-color-input"
+            colorspace="display-p3"
+          />
 
-                <button type="button" id="add-project-back">Back</button>
-                <button type="button" id="add-project-submit">Add</button>
-            </form>
-        </section>
+          <button type="button" id="add-project-back">Back</button>
+          <button type="button" id="add-project-submit">Add</button>
+        </form>
+      </section>
     </div>
     <div id="main">
-        <div id="heading">
-            <h1 id="title">My To-Do</h1>
-            <button type="button" class="add-btn" id="add-td-btn">+</button>
-        </div>
-        <section id="add-todo-view" class="hidden">
-            <h3>Add To-Do</h3>
-            <form>
-                <label for="todo-title-input">To-Do Title:</label>
-                <input type="text" name="todo-title" id="todo-title-input">
-                <label for="todo-duedate-input">Due Date:</label>
-                <input type="date" name="todo-duedate" id="todo-duedate-input">
-                <label for="todo-prio-input">Prority:</label>
-                <select name="todo-prio" id="todo-prio-input">
-                    <option value="high">High</option>
-                    <option value="medium">Medium</option>
-                    <option value="low">Low</option>
-                </select>
-                <label for="todo-project-input">Project:</label>
-                <select name="todo-project" id="todo-project-input">
-                </select>
-                <label for="todo-note-input">Note:</label>
-                <input type="text" name="todo-note" id="todo-note-input">
+      <div id="heading">
+        <h1 id="title">My To-Do</h1>
+        <button type="button" class="add-btn" id="add-td-btn">+</button>
+      </div>
+      <section id="add-todo-view" class="hidden">
+        <h3>Add To-Do</h3>
+        <form>
+          <label for="todo-title-input">To-Do Title:</label>
+          <input type="text" name="todo-title" id="todo-title-input" />
+          <label for="todo-duedate-input">Due Date:</label>
+          <input type="date" name="todo-duedate" id="todo-duedate-input" />
+          <label for="todo-prio-input">Prority:</label>
+          <select name="todo-prio" id="todo-prio-input">
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+          <label for="todo-project-input">Project:</label>
+          <select name="todo-project" id="todo-project-input"></select>
+          <label for="todo-note-input">Note:</label>
+          <input type="text" name="todo-note" id="todo-note-input" />
 
-                <button type="button" id="add-todo-back">Back</button>
-                <button type="button" id="add-todo-submit">Add</button>
-            </form>
+          <button type="button" id="add-todo-back">Back</button>
+          <button type="button" id="add-todo-submit">Add</button>
+        </form>
+      </section>
+      <div id="lists-container">
+        <section id="upcoming-tasks" class="container-for-todos">
+          <h3>Upcoming</h3>
         </section>
-        <div id="lists-container">
-            <section id="upcoming-tasks" class="container-for-todos">
-                <h3>Upcoming</h3>
-            </section>
-            <section id="overdue-tasks" class="container-for-todos">
-                <h3>Overdue</h3>
-            </section>
+        <section id="overdue-tasks" class="container-for-todos">
+          <h3>Overdue</h3>
+        </section>
+      </div>
+      <template id="todo-template">
+        <div class="todo-container">
+          <button type="button" class="check-btn"></button>
+          <span class="todo-title">Task Title</span>
+          <span>Due Date</span>
+          <div class="edit-todo-view hidden">
+            <h4>Edit To-Do</h4>
+            <form>
+              <label for="todo-title-edit">To-Do Title:</label>
+              <input type="text" name="todo-title" class="todo-title-edit" />
+              <label for="todo-duedate-edit">Due Date:</label>
+              <input
+                type="date"
+                name="todo-duedate"
+                class="todo-duedate-edit"
+              />
+              <label for="todo-prio-edit">Prority:</label>
+              <select name="todo-prio" class="todo-prio-edit">
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+              <label for="todo-project-edit">Project:</label>
+              <select name="todo-project" class="todo-project-edit"></select>
+              <label for="todo-note-edit">Note:</label>
+              <input type="text" name="todo-note" class="todo-note-edit" />
+
+              <button type="button" class="edit-todo-back">Back</button>
+              <button type="button" class="edit-todo-submit">Confirm</button>
+            </form>
+          </div>
         </div>
-        <template id="todo-template">
-            <div class="todo-container">
-                <button type="button" class="check-btn"></button>
-                <span class="todo-title">Task Title</span>
-                <span>Due Date</span>
-                <div class ="edit-todo-view hidden">
-                    <h4>Edit To-Do</h4>
-                    <form>
-                        <label for="todo-title-edit">To-Do Title:</label>
-                        <input type="text" name="todo-title" class="todo-title-edit">
-                        <label for="todo-duedate-edit">Due Date:</label>
-                        <input type="date" name="todo-duedate" class="todo-duedate-edit">
-                        <label for="todo-prio-edit">Prority:</label>
-                        <select name="todo-prio" class="todo-prio-edit">
-                            <option value="high">High</option>
-                            <option value="medium">Medium</option>
-                            <option value="low">Low</option>
-                        </select>
-                        <label for="todo-project-edit">Project:</label>
-                        <select name="todo-project" class="todo-project-edit">
-                        </select>
-                        <label for="todo-note-edit">Note:</label>
-                        <input type="text" name="todo-note" class="todo-note-edit">
-                    
-                        <button type="button" class="edit-todo-back">Back</button>
-                        <button type="button" class="edit-todo-submit">Confirm</button>
-                    </form>
-                </div>
-            </div>
-        </template>
-        <template id="side-project-template">
-            <div class="side-project-container">
-                <span>Project Title</span>
-            </div>
-        </template>
-        <template id="project-edit-template">
-            <div class ="edit-project-view hidden">
-                <h3>Edit To-Do</h3>
-                <form>
-                    <label for="project-title-edit">Project Title:</label>
-                    <input type="text" name="project-title" class="project-title-edit">
+      </template>
+      <template id="side-project-template">
+        <div class="side-project-container">
+          <span>Project Title</span>
+        </div>
+      </template>
+      <template id="project-edit-template">
+        <div class="edit-project-view hidden">
+          <h3>Edit To-Do</h3>
+          <form>
+            <label for="project-title-edit">Project Title:</label>
+            <input
+              type="text"
+              name="project-title"
+              class="project-title-edit"
+            />
 
-                    <label for="project-color-edit">Project Color:</label>
-                    <input type="color" name="project-color" class="project-color-edit" colorspace="display-p3">
+            <label for="project-color-edit">Project Color:</label>
+            <input
+              type="color"
+              name="project-color"
+              class="project-color-edit"
+              colorspace="display-p3"
+            />
 
-                    <button type="button" class="edit-project-back">Back</button>
-                    <button type="button" class="edit-project-submit">Confirm</button>
-                </form>
-            </div>
-        </template>
+            <button type="button" class="edit-project-back">Back</button>
+            <button type="button" class="edit-project-submit">Confirm</button>
+          </form>
+        </div>
+      </template>
     </div>
-</body>
+  </body>
 </html>

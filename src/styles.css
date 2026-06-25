@@ -1,183 +1,184 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap");
 
 :root {
-    --primary-color: rgb(184, 221, 233);
-    --primary-dark: rgb(118, 188, 212);
-    --secondary-color: white;
-    --secondary-dark: rgb(235, 239, 246);
-    --tertiary-color:  rgb(210, 233, 236);
-    --text-color: rgb(49, 46, 73);
+  --primary-color: rgb(184, 221, 233);
+  --primary-dark: rgb(118, 188, 212);
+  --secondary-color: white;
+  --secondary-dark: rgb(235, 239, 246);
+  --tertiary-color: rgb(210, 233, 236);
+  --text-color: rgb(49, 46, 73);
 
-    --container-color: rgb(241, 248, 249, 0.5);
+  --container-color: rgb(241, 248, 249, 0.5);
 
-    --high-prio-color: rgb(239, 188, 206);
-    --med-prio-color: rgb(248, 239, 195);
-    --low-prio-color: rgb(184, 233, 208);
+  --high-prio-color: rgb(239, 188, 206);
+  --med-prio-color: rgb(248, 239, 195);
+  --low-prio-color: rgb(184, 233, 208);
 }
 
 body {
-    display: flex;
-    flex-direction: row;
-    font-family: Cabin, sans-serif;
-    background-color: var(--primary-color);
-    color: var(--text-color);
+  display: flex;
+  flex-direction: row;
+  font-family: Cabin, sans-serif;
+  background-color: var(--primary-color);
+  color: var(--text-color);
 
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
-#side-heading, #heading {
-    display: flex;
-    align-items: center;
+#side-heading,
+#heading {
+  display: flex;
+  align-items: center;
 }
 
 #sidebar {
-    background-color: var(--secondary-color);
-    padding: 1.5%;
-    margin: 3.5% 2% 0 2%;
+  background-color: var(--secondary-color);
+  padding: 1.5%;
+  margin: 3.5% 2% 0 2%;
 
-    border-radius: 20px;
+  border-radius: 20px;
 }
 
 #sidebar-head {
-    display: inline-block;
+  display: inline-block;
 }
 
-
 #add-project-view {
-    background-color: var(--tertiary-color);
+  background-color: var(--tertiary-color);
 
-    padding: 2% 3% 5% 3%;
+  padding: 2% 3% 5% 3%;
 
-    border-radius: 12px;
-    box-shadow: 1px 2px 0 2px var(--primary-color);
+  border-radius: 12px;
+  box-shadow: 1px 2px 0 2px var(--primary-color);
 }
 
 .side-project-container {
-    margin: 3% 2%;
-    padding: 3%;
-    border-radius: 7px;
-    text-align: center;
-    color: var(--secondary-color);
-    /* make it lighter when clicked */
+  margin: 3% 2%;
+  padding: 3%;
+  border-radius: 7px;
+  text-align: center;
+  color: var(--secondary-color);
+  /* make it lighter when clicked */
 }
 
 #add-project-btn {
-    width: 35px;
-    height: 35px;
+  width: 35px;
+  height: 35px;
 }
 
 .add-btn {
-    all: unset;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    background-color: var(--secondary-color);
-    width: 40px;
-    height: 40px;
-    border-radius: 30px;
+  background-color: var(--secondary-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
 
-    font-size: 2em;
-    
-    margin: 2%;
-    border: 2px solid var(--primary-dark);
+  font-size: 2em;
+
+  margin: 2%;
+  border: 2px solid var(--primary-dark);
 }
 
 .add-btn:active {
-    border: 2px solid var(--primary-color);
+  border: 2px solid var(--primary-color);
 }
 
 #main {
-    padding: 3%;
+  padding: 3%;
 }
 
 h1 {
-    display: inline-block;
+  display: inline-block;
 }
 
 #lists-container {
-    display: flex;
-    flex-wrap: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 .container-for-todos {
-    background-color: var(--container-color);
+  background-color: var(--container-color);
 
-    min-width: 50%;
+  min-width: 50%;
 
-    padding: 3%;
-    margin: 5% 10% 5% 0;
-    border-radius: 10px;
+  padding: 3%;
+  margin: 5% 10% 5% 0;
+  border-radius: 10px;
 }
 
 .todo-container {
-    background-color: var(--secondary-color);
-    margin: 3% 2%;
-    padding: 3%;
-    border-radius: 8px;
+  background-color: var(--secondary-color);
+  margin: 3% 2%;
+  padding: 3%;
+  border-radius: 8px;
 
-    width: fit-content;
+  width: fit-content;
 
-    text-align: left;
+  text-align: left;
 }
 
 .high-priority {
-    box-shadow: 3px 4px 0 0 var(--high-prio-color);
+  box-shadow: 3px 4px 0 0 var(--high-prio-color);
 }
 
 .med-priority {
-    box-shadow: 3px 4px 0 0 var(--med-prio-color);
+  box-shadow: 3px 4px 0 0 var(--med-prio-color);
 }
 
 .low-priority {
-    box-shadow: 3px 4px 0 0 var(--low-prio-color);
+  box-shadow: 3px 4px 0 0 var(--low-prio-color);
 }
 
 .todo-container > * {
-    margin: 3% 0;
+  margin: 3% 0;
 }
 
-.todo-container > span:not(:first-of-type) { 
-    display: block;
+.todo-container > span:not(:first-of-type) {
+  display: block;
 }
 
 .td-info > * {
-    display: block;
+  display: block;
 }
 
 .check-btn {
-    all: unset;
-    display: inline-block;
-    min-width: 13px;
-    min-height: 13px;
-    background-color: var(--secondary-color);
-    border: 2px solid var(--text-color);
+  all: unset;
+  display: inline-block;
+  min-width: 13px;
+  min-height: 13px;
+  background-color: var(--secondary-color);
+  border: 2px solid var(--text-color);
 }
 
 #add-todo-view {
-    background-color: var(--secondary-color);
+  background-color: var(--secondary-color);
 
-    padding: 2% 3% 5% 3%;
+  padding: 2% 3% 5% 3%;
 
-    border-radius: 15px;
-    box-shadow: 2px 3px 0 2px var(--secondary-dark);
+  border-radius: 15px;
+  box-shadow: 2px 3px 0 2px var(--secondary-dark);
 }
 
 form > *:not(button) {
-    display: block;
-    margin: 3%;
+  display: block;
+  margin: 3%;
 }
 
-button, .todo-container > button:not(.check-btn, .add-btn) {
-    all: unset;
-    background-color: var(--secondary-color);
-    border: 2px solid var(--tertiary-color);
-    border-radius: 6px;
+button,
+.todo-container > button:not(.check-btn, .add-btn) {
+  all: unset;
+  background-color: var(--secondary-color);
+  border: 2px solid var(--tertiary-color);
+  border-radius: 6px;
 
-    padding: 2% 4%;
-    margin: 2%;
+  padding: 2% 4%;
+  margin: 2%;
 }

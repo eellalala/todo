@@ -7,9 +7,6 @@ import {
 } from "date-fns";
 import {
   setLocalTDs,
-  getLocalTDs,
-  getLocalProjects,
-  setLocalProjects,
 } from "./storage.js";
 
 export {

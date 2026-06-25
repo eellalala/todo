@@ -7,7 +7,6 @@ import {
 } from "./lists.js";
 import { addProject } from "./project.js";
 import {
-  renderTDArr,
   checkTD,
   uncheckTD,
   expandTD,
